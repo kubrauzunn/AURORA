@@ -28,6 +28,7 @@ public class PersonalThemeActivity extends AppCompatActivity {
                     .commit();
         }
 
+        //To be implemented
         spotifyIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
