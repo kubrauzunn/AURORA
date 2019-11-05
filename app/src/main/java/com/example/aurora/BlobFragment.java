@@ -38,6 +38,7 @@ public class BlobFragment extends Fragment { private AnimatedVectorDrawable blob
         blobView.setImageDrawable(blob);
         blob.start();
 
+
         return v;
     }
 

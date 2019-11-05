@@ -31,15 +31,15 @@
             <set>
                 <objectAnimator
                     android:propertyName="pathData"
-                    android:duration="83"
+                    android:duration="50"
                     android:valueFrom="M 7 6 L 7 6 L 17 12 L 17 12 L 7 12"
                     android:valueTo="M 7 12 L 7 9 L 17 9 L 17 12 L 7 12"
                     android:valueType="pathType"
                     android:interpolator="@android:interpolator/fast_out_slow_in"/>
                 <objectAnimator
                     android:propertyName="pathData"
-                    android:startOffset="83"
-                    android:duration="917"
+                    android:startOffset="50"
+                    android:duration="300"
                     android:valueFrom="M 7 12 L 7 9 L 17 9 L 17 12 L 7 12"
                     android:valueTo="M 10.5 18 L 7.5 18 L 7.5 6 L 10.5 6 L 10.5 18"
                     android:valueType="pathType"
@@ -52,15 +52,15 @@
             <set>
                 <objectAnimator
                     android:propertyName="pathData"
-                    android:duration="83"
+                    android:duration="50"
                     android:valueFrom="M 7 12 L 7 18 L 7 18 L 17 12 L 7 12"
                     android:valueTo="M 7 12 L 7 15 L 17 15 L 17 12 L 7 12"
                     android:valueType="pathType"
                     android:interpolator="@android:interpolator/fast_out_slow_in"/>
                 <objectAnimator
                     android:propertyName="pathData"
-                    android:startOffset="83"
-                    android:duration="917"
+                    android:startOffset="50"
+                    android:duration="300"
                     android:valueFrom="M 7 12 L 7 15 L 17 15 L 17 12 L 7 12"
                     android:valueTo="M 13.5 18 L 16.5 18 L 16.5 6 L 13.5 6 L 13.5 18"
                     android:valueType="pathType"
@@ -72,7 +72,7 @@
         <aapt:attr name="android:animation">
             <objectAnimator
                 android:propertyName="translateX"
-                android:duration="355"
+                android:duration="300"
                 android:valueFrom="1.2"
                 android:valueTo="0"
                 android:valueType="floatType"
