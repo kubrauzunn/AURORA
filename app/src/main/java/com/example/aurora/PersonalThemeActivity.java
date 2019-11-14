@@ -15,18 +15,10 @@ public class PersonalThemeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //super.setFragmentPersonalTheme();
         setContentView(R.layout.activity_personal_theme);
-
         initalizeWidgets();
-
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragmentTheme = fm.findFragmentById(R.id.fragment_theme);
-        if (fragmentTheme == null) {
-            fragmentTheme = new ThemeFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragment_theme, fragmentTheme)
-                    .commit();
-        }
+        setFM();
 
         //To be implemented
         spotifyIcon.setOnClickListener(new View.OnClickListener() {
@@ -42,5 +34,14 @@ public class PersonalThemeActivity extends AppCompatActivity {
         spotifyIcon = findViewById(R.id.spotify_icon);
     }
 
-
+    void setFM() {
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragmentTheme = fm.findFragmentById(R.id.fragment_theme);
+        if (fragmentTheme == null) {
+            fragmentTheme = new ThemeFragment();
+            fm.beginTransaction()
+                    .add(R.id.fragment_theme, fragmentTheme)
+                    .commit();
+        }
+    }
 }

@@ -9,7 +9,8 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 
-public class BlobFragment extends Fragment { private AnimatedVectorDrawable blob;
+public class BlobFragment extends Fragment {
+    private AnimatedVectorDrawable blob;
     private AnimatedVectorDrawable pause;
     private AnimatedVectorDrawable play;
     private ImageView blobView;
@@ -37,7 +38,6 @@ public class BlobFragment extends Fragment { private AnimatedVectorDrawable blob
         blob = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.blob_ocean, null);
         blobView.setImageDrawable(blob);
         blob.start();
-
 
         return v;
     }
