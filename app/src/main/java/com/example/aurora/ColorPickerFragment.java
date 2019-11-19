@@ -31,9 +31,6 @@ public class ColorPickerFragment extends Fragment {
 
         //initializing and animating UI widgets
         getColorPicker();
-        initializeButtons();
-        animateButtons();
-
         return view;
     }
 
@@ -52,26 +49,9 @@ public class ColorPickerFragment extends Fragment {
         //picker.setShowOldCenterColor(false);
     }
 
-    public void animate(View view) {
-        AnimatedVectorDrawable drawable = tick ? pause : play;
-        pp_button.setImageDrawable(drawable);
-        drawable.start();
-        tick = !tick;
-    }
-    void initializeButtons(){
-        pp_button = (ImageView) view.findViewById(R.id.pause_play_b);
-        pause =  (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_pause_play_button, null);
-        play = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_play_pause_button, null);
-    }
 
-    void animateButtons(){
-        pp_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                animate(null);
-            }
-        });
-    }
+
+
 }
 
 
