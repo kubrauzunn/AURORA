@@ -15,25 +15,12 @@ public class PersonalThemeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //super.setFragmentPersonalTheme();
         setContentView(R.layout.activity_personal_theme);
         initalizeWidgets();
         setFM();
-
-        //To be implemented
-        spotifyIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // Intent spotifyIntent = new Intent(PersonalThemeActivity.this, ForestThemeActivity.class);
-               // startActivity(spotifyIntent);
-            }
-        });
     }
 
-    void initalizeWidgets(){
-        spotifyIcon = findViewById(R.id.spotify_icon);
-    }
-
+    //helper methods
     void setFM() {
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragmentTheme = fm.findFragmentById(R.id.fragment_theme);
@@ -43,5 +30,28 @@ public class PersonalThemeActivity extends AppCompatActivity {
                     .add(R.id.fragment_theme, fragmentTheme)
                     .commit();
         }
+        Fragment fragmentBlob = fm.findFragmentById(R.id.fragment_color_picker);
+        if (fragmentBlob == null) {
+            fragmentBlob = new ColorPickerFragment();
+            fm.beginTransaction()
+                    .add(R.id.fragment_color_picker, fragmentBlob)
+                    .commit();
+        }
     }
+
+    void initalizeWidgets(){
+        spotifyIcon = findViewById(R.id.spotify_icon);
+    }
+
+    //To be implemented
+    void startSpotify(){
+        spotifyIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Intent spotifyIntent = new Intent(PersonalThemeActivity.this, ForestThemeActivity.class);
+                // startActivity(spotifyIntent);
+            }
+        });
+    }
+
 }

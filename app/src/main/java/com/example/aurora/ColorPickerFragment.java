@@ -1,5 +1,6 @@
+
+
 package com.example.aurora;
-import android.content.Intent;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,51 +10,54 @@ import android.widget.ImageView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
+import com.larswerkman.holocolorpicker.ColorPicker;
 
-public class BlobFragment extends Fragment { private AnimatedVectorDrawable blob;
+
+public class ColorPickerFragment extends Fragment {
+
+    private AnimatedVectorDrawable blob;
     private AnimatedVectorDrawable pause;
     private AnimatedVectorDrawable play;
     private ImageView blobView;
     private ImageView pp_button;
     private boolean tick = true;
-    private View view;
+    View view;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, //return all views in UI
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.blob_fragment, container, false);
-        //initializing and animating buttons
+        view = inflater.inflate(R.layout.color_picker_fragment, container, false);
+
+        //initializing and animating UI widgets
+        getColorPicker();
         initializeButtons();
         animateButtons();
-        //initializing and animating blob
-        initializeBlob();
-        animateBlob();
+
         return view;
     }
 
-    //helper methods
-    void playMusic(){
-        pp_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
-    }
-    void stopMusic(){
-        pp_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
+    public void getColorPicker(){
+        ColorPicker picker = (ColorPicker) view.findViewById(R.id.picker);
+        view.findViewById(R.id.picker);
+        //To get the color
+        picker.getColor();
+
+        //To set the old selected color u can do it like this
+        //picker.setOldCenterColor(picker.getColor());
+        //adds listener to the colorpicker which is implemented in the activity
+        //picker.setOnColorChangedListener((ColorPicker.OnColorChangedListener) this);
+
+        //to turn of showing the old color
+        //picker.setShowOldCenterColor(false);
     }
 
-    void animate(View view) {
+    public void animate(View view) {
         AnimatedVectorDrawable drawable = tick ? pause : play;
         pp_button.setImageDrawable(drawable);
         drawable.start();
         tick = !tick;
     }
-
     void initializeButtons(){
         pp_button = (ImageView) view.findViewById(R.id.pause_play_b);
         pause =  (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_pause_play_button, null);
@@ -68,14 +72,6 @@ public class BlobFragment extends Fragment { private AnimatedVectorDrawable blob
             }
         });
     }
-
-    void initializeBlob() {
-        blobView = (ImageView) view.findViewById(R.id.blob_o);
-        blob = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.blob_ocean, null);
-    }
-
-    void animateBlob() {
-        blobView.setImageDrawable(blob);
-        blob.start();
-    }
 }
+
+

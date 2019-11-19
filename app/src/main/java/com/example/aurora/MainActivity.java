@@ -10,12 +10,10 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     //GUI variables on start interface
-
     private ImageView personalPeacePlayBtn;
     private ImageView forestThemePlayBtn;
     private ImageView oceanThemePlayBtn;
 
-    //theme titles
     private TextView theme1;
     private TextView theme2;
     private TextView theme3;
@@ -26,14 +24,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //play buttons
+        //initialize UI widgets
         initializePlaybuttons();
-
-        //initialize theme titles
         initializeThemeTitles();
 
         //starting themes
-        // starting PERSONAL theme by clicking on button or title
+        startPersonalTheme();
+        startOceanTheme();
+        startForestTheme();
+        startSpotify();
+    }
+
+    // helper methods to wire up UI widgets
+    void initializePlaybuttons() {
+        personalPeacePlayBtn = findViewById(R.id.play_personal_theme_icon);
+        forestThemePlayBtn = findViewById(R.id.play_forest_theme_icon2);
+        oceanThemePlayBtn = findViewById(R.id.play_ocean_them_icon3);
+    }
+    //wire up themes titles
+    void initializeThemeTitles(){
+        theme1 = findViewById(R.id.theme1_title);
+        theme2 = findViewById(R.id.theme2_title);
+        theme3 = findViewById(R.id.theme3_title);
+    }
+    //start personal
+    void startPersonalTheme(){
         personalPeacePlayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,25 +65,9 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
-        //starting FOREST theme by clicking on button or title
-        forestThemePlayBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent forestThemeIntent = new Intent(MainActivity.this, ForestThemeActivity.class );
-                startActivity(forestThemeIntent);
-            }
-
-        });
-        theme2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent forestThemeIntent = new Intent(MainActivity.this, ForestThemeActivity.class);
-                startActivity(forestThemeIntent);
-            }
-        });
-
-        //starting OCEAN theme by clicking on button or title
+    }
+    //start ocean
+    void startOceanTheme(){
         oceanThemePlayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,22 +84,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    //start forest
+    void startForestTheme(){
+        forestThemePlayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent forestThemeIntent = new Intent(MainActivity.this, ForestThemeActivity.class );
+                startActivity(forestThemeIntent);
+            }
 
-    // helper methods to wire up GUI widgets
-    // wire up playbuttons
-    void initializePlaybuttons() {
-        personalPeacePlayBtn = findViewById(R.id.play_personal_theme_icon);
-        forestThemePlayBtn = findViewById(R.id.play_forest_theme_icon2);
-        oceanThemePlayBtn = findViewById(R.id.play_ocean_them_icon3);
-    }
-    //wire up themes titles
-    void initializeThemeTitles(){
-        theme1 = findViewById(R.id.theme1_title);
-        theme2 = findViewById(R.id.theme2_title);
-        theme3 = findViewById(R.id.theme3_title);
+        });
+        theme2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent forestThemeIntent = new Intent(MainActivity.this, ForestThemeActivity.class);
+                startActivity(forestThemeIntent);
+            }
+        });
     }
 
-    //SPOTIFY connecting code here, needs to be in the MainActivity
+    void startSpotify() {
+        //not implemented yet
+    }
+
+    //SPOTIFY connecting code should go in here, needs to be in the MainActivity
     @Override
     protected void onStart() {
         super.onStart();

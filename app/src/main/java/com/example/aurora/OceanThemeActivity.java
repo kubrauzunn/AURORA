@@ -13,7 +13,7 @@ public class OceanThemeActivity extends AppCompatActivity {
         setFM();
     }
 
-
+    //helper methods inflating fragment
     void setFM(){
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_theme);

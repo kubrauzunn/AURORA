@@ -14,7 +14,7 @@ public class ForestThemeActivity extends AppCompatActivity {
         setFM();
 
     }
-
+    //fragment managing
     void setFM(){
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragmentTheme = fm.findFragmentById(R.id.fragment_theme);
