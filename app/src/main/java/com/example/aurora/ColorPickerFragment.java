@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.larswerkman.holocolorpicker.ColorPicker;
+
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
-import com.larswerkman.holocolorpicker.ColorPicker;
 
 
 public class ColorPickerFragment extends Fragment {
