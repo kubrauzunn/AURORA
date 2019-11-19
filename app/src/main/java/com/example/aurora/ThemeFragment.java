@@ -55,7 +55,7 @@ public class ThemeFragment extends Fragment {
     }
 
     void trackBrightnessBarProgress(){
-        brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+       brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int brightnessChangedVal;
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

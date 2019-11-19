@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- The android:opacity=”opaque” line — this is critical in preventing a flash of black as your theme transitions. -->
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
-    <item android:drawable="@drawable/shape">
-    </item>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item>
-        <bitmap
-            android:src="@drawable/logo1"
-            android:gravity="center" />
-    </item>
-</layer-list>
+    <gradient
+        android:startColor="#4300b0"
+        android:endColor="#605291" android:angle="135">
+    </gradient>
+</shape>

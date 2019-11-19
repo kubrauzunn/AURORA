@@ -1,5 +1,5 @@
 package com.example.aurora;
-import android.content.Intent;
+
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,5 +24,4 @@ public class BlobFragment extends Fragment {
         blob.start();
         return v;
     }
-
 }
