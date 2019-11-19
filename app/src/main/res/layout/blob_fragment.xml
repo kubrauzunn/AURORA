@@ -7,19 +7,6 @@
     tools:context=".OceanThemeActivity">
 
     <ImageView
-        android:id="@+id/pause_play_b2"
-        android:layout_width="55dp"
-        android:layout_height="300dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        android:src="@drawable/avd_pause_play_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.271"/>
-
-    <ImageView
         android:id="@+id/blob_o"
         android:layout_width="300dp"
         android:layout_height="300dp"
@@ -31,20 +18,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.271"/>
-
-    <ImageView
-        android:id="@+id/pause_play_b"
-        android:layout_width="55dp"
-        android:layout_height="300dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        android:src="@drawable/avd_pause_play_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.271"/>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

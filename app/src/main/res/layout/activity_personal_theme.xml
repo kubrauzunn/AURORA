@@ -7,24 +7,10 @@
     android:background="@drawable/personal_theme_background"
     tools:context=".PersonalThemeActivity">
 
-    <ImageView
-        android:id="@+id/blob_personal"
-        android:src="@drawable/blob_personal"
+    <FrameLayout
+        android:id="@+id/fragment_color_picker"
         android:layout_width="300dp"
         android:layout_height="400dp"
-        android:layout_alignParentLeft="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.271"
-        android:alpha="1"/>
-
-    <FrameLayout
-        android:id="@+id/fragment_blob_personal"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
