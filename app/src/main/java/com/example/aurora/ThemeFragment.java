@@ -15,20 +15,29 @@ public class ThemeFragment extends Fragment {
     private SeekBar soundSeekBar;
     private ImageView bulbBrightnessIcon;
     private ImageView volumeIcon;
+    private View view;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, //return all views in UI
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, //returns all views in UI
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_theme, container, false);
+        view = inflater.inflate(R.layout.fragment_theme, container, false);
+        wireUpUI();
+        trackSoundBarProgress();
+        trackBrightnessBarProgress();
+        return view;
+    }
 
-        brightnessSeekBar = v.findViewById(R.id.brightnessSeekBar);
-        soundSeekBar = v.findViewById(R.id.volumeSeekBar);
-        bulbBrightnessIcon = v.findViewById(R.id.brightness_icon);
-        volumeIcon = v.findViewById(R.id.volume_icon);
+    //helper methods
+    void wireUpUI() {
+        brightnessSeekBar = view.findViewById(R.id.brightnessSeekBar);
+        soundSeekBar = view.findViewById(R.id.volumeSeekBar);
+        bulbBrightnessIcon = view.findViewById(R.id.brightness_icon);
+        volumeIcon = view.findViewById(R.id.volume_icon);
+    }
 
-
+    void trackSoundBarProgress() {
         soundSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int volumeChangeVal;
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 // volumeChange = progress;
@@ -38,14 +47,15 @@ public class ThemeFragment extends Fragment {
             public void onStartTrackingTouch(SeekBar seekBar) {
                 //code to come
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 //come to come
             }
         });
+    }
 
-        brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+    void trackBrightnessBarProgress(){
+       brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int brightnessChangedVal;
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -56,16 +66,12 @@ public class ThemeFragment extends Fragment {
             public void onStartTrackingTouch(SeekBar seekBar) {
                 //code to come
             }
-
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 //come to come
             }
         });
-        return v;
+
     }
-
-
-
 
 }

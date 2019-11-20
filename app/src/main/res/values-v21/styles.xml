@@ -12,4 +12,8 @@
         <item name="android:progressTint">#C05396</item>
         <item name="android:colorControlActivated">@color/colorAccent</item>
     </style>
+
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/front_screen</item>
+    </style>
 </resources>

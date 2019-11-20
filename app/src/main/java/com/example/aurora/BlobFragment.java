@@ -11,33 +11,18 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 
-public class BlobFragment extends Fragment { private AnimatedVectorDrawable blob;
-    private AnimatedVectorDrawable pause;
-    private AnimatedVectorDrawable play;
+
+public class BlobFragment extends Fragment {
+    private AnimatedVectorDrawable blob;
     private ImageView blobView;
-    private ImageView pp_button;
-    private boolean tick = true;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, //return all views in UI
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.blob_fragment, container, false);
-
-        //initializing and animating buttons
-        pp_button = (ImageView) v.findViewById(R.id.pause_play_b);
-        pause =  (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_pause_play_button, null);
-        play = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_play_pause_button, null);
-        pp_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                animate(null);
-            }
-        });
-
-        //initializing and animating blob
         blobView = (ImageView) v.findViewById(R.id.blob_o);
         blob = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.blob_ocean, null);
         blobView.setImageDrawable(blob);
+<<<<<<< HEAD
          blob.start();
 
 
@@ -55,4 +40,9 @@ public class BlobFragment extends Fragment { private AnimatedVectorDrawable blob
         drawable.start();
         tick = !tick;
     }
+=======
+        blob.start();
+        return v;
+    }
+>>>>>>> 4b6a73591db10bea4a9c8329b58883aadf3b1bc6
 }
