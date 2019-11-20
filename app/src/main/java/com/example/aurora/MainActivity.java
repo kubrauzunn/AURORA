@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.SplashTheme);
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -123,4 +123,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         // Aaand we will finish off here.
     }
+
+
 }

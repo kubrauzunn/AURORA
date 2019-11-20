@@ -1,3 +1,4 @@
+/*
 package com.example.aurora;
 
 import android.bluetooth.BluetoothA2dp;
@@ -46,7 +47,7 @@ public class Bluetooth extends AppCompatActivity {
 
     }
 
-    /**
+*
      * Device discovery is a scanning procedure that searches the local area
      * for Bluetooth-enabled devices and requests some information about each one.
      * However, a nearby Bluetooth device responds to a discovery request only if
@@ -55,7 +56,8 @@ public class Bluetooth extends AppCompatActivity {
      * such as the device's name, its class, and its unique MAC address.
      * Using this information, the device that is performing the discovery process can then choose
      * to initiate a connection to the discovered device.
-     */
+
+
 
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
@@ -70,6 +72,8 @@ public class Bluetooth extends AppCompatActivity {
         }
     };
 
+
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -78,3 +82,4 @@ public class Bluetooth extends AppCompatActivity {
     }
 
 }
+*/
