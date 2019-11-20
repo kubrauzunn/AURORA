@@ -1,10 +1,12 @@
 package com.example.aurora;
+
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
@@ -36,11 +38,16 @@ public class BlobFragment extends Fragment { private AnimatedVectorDrawable blob
         blobView = (ImageView) v.findViewById(R.id.blob_o);
         blob = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.blob_ocean, null);
         blobView.setImageDrawable(blob);
-        blob.start();
+         blob.start();
 
 
         return v;
     }
+
+
+
+
+
 
     public void animate(View view) {
         AnimatedVectorDrawable drawable = tick ? pause : play;
