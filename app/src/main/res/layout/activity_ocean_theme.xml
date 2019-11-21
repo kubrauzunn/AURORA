@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/ocean_theme_background"
     tools:context=".OceanThemeActivity">
-<!--
-    <ImageView
+
+    <!--
+   <ImageView
         android:id="@+id/pause_play_b2_ocean"
         android:layout_width="55dp"
         android:layout_height="300dp"
@@ -19,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.271"/>
--->
+        -->
 
     <ImageView
         android:id="@+id/pause_play_b_ocean"
@@ -62,6 +63,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.271">
+
+
     </FrameLayout>
 
     <FrameLayout
@@ -76,6 +79,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.698">
     </FrameLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

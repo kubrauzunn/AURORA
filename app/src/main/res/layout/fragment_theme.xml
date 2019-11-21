@@ -72,8 +72,5 @@
     <!-- android:progressDrawable="@drawable/custom_seekbar_progress"
      android:thumb="@drawable/custom_seekbar_thumb"
     -->
-       />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 

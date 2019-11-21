@@ -33,7 +33,7 @@ public class ColorPickerFragment extends Fragment {
         return view;
     }
 
-    public void getColorPicker(){
+    public void getColorPicker() {
         ColorPicker picker = (ColorPicker) view.findViewById(R.id.picker);
         view.findViewById(R.id.picker);
         picker.getColor();
@@ -45,7 +45,8 @@ public class ColorPickerFragment extends Fragment {
 
         //to turn of showing the old color
         //picker.setShowOldCenterColor(false);
-    }
+    }}
+
 
 
     /**
@@ -76,6 +77,6 @@ public class ColorPickerFragment extends Fragment {
             }
         });
     }*/
-}
+
 
 

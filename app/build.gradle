@@ -12,6 +12,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
+
     }
     buildTypes {
         release {
@@ -33,7 +34,6 @@ dependencies {
 }
 allprojects {
     repositories {
-        google()
         jcenter()
         maven { url 'https://jitpack.io' }
     }

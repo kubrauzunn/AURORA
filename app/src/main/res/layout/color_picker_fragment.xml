@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OceanThemeActivity">
+
     <!--
     <ImageView
         android:id="@+id/pause_play_b"

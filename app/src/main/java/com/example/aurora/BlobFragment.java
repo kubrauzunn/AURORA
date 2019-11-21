@@ -1,4 +1,5 @@
 package com.example.aurora;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,6 @@ public class BlobFragment extends Fragment {
         return v;
 
     }
-
 }
 
 

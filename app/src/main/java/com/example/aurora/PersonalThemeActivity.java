@@ -3,14 +3,16 @@ package com.example.aurora;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+
 public class PersonalThemeActivity extends AppCompatActivity {
 
     private ImageView spotifyIcon;
+    private static MediaPlayer oceanMediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +20,7 @@ public class PersonalThemeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_personal_theme);
         initalizeWidgets();
         setFM();
+        setMediaPlayer();
     }
 
     /**
@@ -51,14 +54,34 @@ public class PersonalThemeActivity extends AppCompatActivity {
     }
 
 
-    void startSpotify(){
+    //for testing bluetooth connection purposes
+    void setMediaPlayer() {
+        oceanMediaPlayer = MediaPlayer.create(this, R.raw.forest_sounds);
         spotifyIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Intent spotifyIntent = new Intent(PersonalThemeActivity.this, ForestThemeActivity.class);
-                // startActivity(spotifyIntent);
+                if (!oceanMediaPlayer.isPlaying()) {
+                    oceanMediaPlayer.start();
+
+                } else {
+                    oceanMediaPlayer.pause();
+
+                }
             }
         });
+
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (oceanMediaPlayer != null) {
+            oceanMediaPlayer.pause();
+            if (isFinishing()) {
+                oceanMediaPlayer.stop();
+                oceanMediaPlayer.release();
+            }
+        }
+    }
+
 
 }
