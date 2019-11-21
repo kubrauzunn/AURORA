@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/ocean_theme_background"
     tools:context=".OceanThemeActivity">
-
-
+<!--
     <ImageView
         android:id="@+id/pause_play_b2_ocean"
         android:layout_width="55dp"
@@ -16,10 +15,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        android:src="@drawable/avd_pause_play_button"
+        app:srcCompat="@drawable/avd_pause_play_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.271"/>
+-->
 
     <ImageView
         android:id="@+id/pause_play_b_ocean"
@@ -29,11 +29,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        android:src="@drawable/avd_pause_play_button"
+        app:srcCompat="@drawable/ic_play_circle_outline_black_24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.271"/>
 
+
+    <TextView
+        android:id="@+id/theme3_title"
+        android:text="Ocean's Echo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/open_sans_semibold"
+        android:textColor="#e0eee0"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.85"/>
 
     <FrameLayout
         android:id="@+id/fragment_blob"
@@ -43,7 +58,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        android:src="@drawable/blob_ocean"
+        app:srcCompat="@drawable/blob_ocean"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.271">

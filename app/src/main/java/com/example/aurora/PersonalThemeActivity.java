@@ -20,7 +20,9 @@ public class PersonalThemeActivity extends AppCompatActivity {
         setFM();
     }
 
-    //helper methods
+    /**
+     * Sets up fragment managers
+     */
     void setFM() {
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragmentTheme = fm.findFragmentById(R.id.fragment_theme);
@@ -39,11 +41,16 @@ public class PersonalThemeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * The following section contains code which will be implemented later on in relation to
+     * the integration of Spotify
+     */
+
     void initalizeWidgets(){
         spotifyIcon = findViewById(R.id.spotify_icon);
     }
 
-    //To be implemented
+
     void startSpotify(){
         spotifyIcon.setOnClickListener(new View.OnClickListener() {
             @Override
