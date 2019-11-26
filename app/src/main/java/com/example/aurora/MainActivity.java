@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    //GUI variables on start interface
     private ImageView personalPeacePlayBtn;
     private ImageView forestThemePlayBtn;
     private ImageView oceanThemePlayBtn;
@@ -20,9 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-       // setTheme(R.style.AppTheme);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initializePlayButtons();
@@ -30,12 +26,12 @@ public class MainActivity extends AppCompatActivity {
         startPersonalTheme();
         startOceanTheme();
         startForestTheme();
-        //startSpotify();
     }
 
     /**
      * The following sections of code contains helper methods to set up GUI elements
      */
+
     void initializePlayButtons() {
         personalPeacePlayBtn = findViewById(R.id.play_personal_theme_icon);
         forestThemePlayBtn = findViewById(R.id.play_forest_theme_icon2);
@@ -57,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+
         theme1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+
         theme2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

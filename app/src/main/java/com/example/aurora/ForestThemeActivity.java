@@ -1,21 +1,17 @@
 package com.example.aurora;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
 public class ForestThemeActivity extends AppCompatActivity {
-
-    /*******Variable will be used later on**********/
-    private AnimatedVectorDrawableCompat pause;
-    private AnimatedVectorDrawableCompat play;
-    /*********************************************/
-
+    private AnimatedVectorDrawable pause;
+    private AnimatedVectorDrawable play;
     private ImageView pp_button;
     private boolean tick = true;
     private static MediaPlayer forestMediaPlayer;
@@ -30,6 +26,21 @@ public class ForestThemeActivity extends AppCompatActivity {
     }
 
 
+    /**
+     *
+     * Methods related to the playing of music and play buttons
+     *
+     **/
+
+    void setUpPlayButton(){
+        pp_button = findViewById(R.id.pause_play_b_forest);
+        pp_button.bringToFront();
+        pause = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_pause_play_button, null);
+        play = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_play_pause_button, null);
+    }
+
+
+
     void setMediaPlayer(){
         forestMediaPlayer = MediaPlayer.create(this, R.raw.forest_sounds);
         pp_button.setOnClickListener(new View.OnClickListener() {
@@ -37,26 +48,21 @@ public class ForestThemeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!forestMediaPlayer.isPlaying()){
                     forestMediaPlayer.start();
-                    pp_button.setImageResource(R.drawable.ic_pause_circle_outline_black_24dp);
-                    //animate(null);
+                    animate(null);
                 } else {
                     forestMediaPlayer.pause();
-                    pp_button.setImageResource(R.drawable.ic_play_circle_outline_black_24dp);
-                    //animate(null);
+                    animate(null);
                 }
             }
         });
     }
 
-
-
-    void setUpPlayButton(){
-        pp_button = findViewById(R.id.play_pause_btt);
-        pp_button.bringToFront();
-        //pause = ResourcesCompat.getDrawable(getResources(), R.drawable.avd_pause_play_button, null);
-        //play =  ResourcesCompat.getDrawable(getResources(), R.drawable.avd_play_pause_button, null);
+    public void animate(View view) {
+        AnimatedVectorDrawable drawable = tick ? play : pause ;
+        pp_button.setImageDrawable(drawable);
+        drawable.start();
+        tick = !tick;
     }
-
 
     @Override
     protected void onPause() {
@@ -69,7 +75,14 @@ public class ForestThemeActivity extends AppCompatActivity {
             }
         }
     }
-    //fragment managing
+
+
+
+    /**
+     * Methods related to the management of fragments
+     **/
+
+
     void setFM(){
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragmentTheme = fm.findFragmentById(R.id.fragment_theme);
@@ -88,21 +101,5 @@ public class ForestThemeActivity extends AppCompatActivity {
                     .commit();
         }
     }
-
-
-    /**
-     * The following section contains code which is not usable at the moment due to
-     * backwards compatibility issues. We are working on this.
-     **/
-
-    /*
-    public void animate(View view) {
-        AnimatedVectorDrawableCompat drawable = tick ? pause : play;
-        pp_button.setImageDrawable(drawable);
-        drawable.start();
-        tick = !tick;
-    }
-    */
-
 
 }

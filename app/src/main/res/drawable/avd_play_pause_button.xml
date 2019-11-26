@@ -11,7 +11,7 @@
             <path
                 android:name="path_1"
                 android:pathData="M 0.101 11.965 C 0.101 5.356 5.398 0 11.933 0 C 18.467 0 23.765 5.356 23.765 11.965 C 23.765 18.576 18.467 23.933 11.933 23.933 C 5.398 23.933 0.101 18.576 0.101 11.965 Z"
-                android:fillColor="@color/pause_play"
+                android:fillColor="#db4488"
                 android:fillAlpha="0.8"
                 android:strokeWidth="0.1"/>
             <group android:name="group">

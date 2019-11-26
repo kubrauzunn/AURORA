@@ -1,4 +1,5 @@
 package com.example.aurora;
+import android.graphics.drawable.AnimatedVectorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -8,12 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
+
 
 public class OceanThemeActivity extends AppCompatActivity {
     private ImageView play_pause;
-    private AnimatedVectorDrawableCompat pause;
-    private AnimatedVectorDrawableCompat play;
+    private AnimatedVectorDrawable pause;
+    private AnimatedVectorDrawable play;
     private boolean tick = true;
     private static MediaPlayer oceanMediaPlayer;
 
@@ -36,17 +37,25 @@ public class OceanThemeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!oceanMediaPlayer.isPlaying()){
                     oceanMediaPlayer.start();
-                    play_pause.setImageResource(R.drawable.ic_pause_circle_outline_black_24dp);
-                    //animate(null);
-                } else {
+                    animate(null);
+               } else {
                     oceanMediaPlayer.pause();
-                    play_pause.setImageResource(R.drawable.ic_play_circle_outline_black_24dp);
-                    //animate(null);
+                    animate(null);
                 }
             }
         });
 
     }
+
+
+
+    public void animate(View view) {
+        AnimatedVectorDrawable drawable = tick ? play : pause;
+        play_pause.setImageDrawable(drawable);
+        drawable.start();
+        tick = !tick;
+    }
+
 
     /**
      * Sets up the buttons for the media player
@@ -55,8 +64,8 @@ public class OceanThemeActivity extends AppCompatActivity {
     void setUpPlayButton(){
         play_pause = findViewById(R.id.pause_play_b_ocean);
         play_pause.bringToFront();
-        //pause = (AnimatedVectorDrawableCompat) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_pause_play_button, null);
-        //pause = (AnimatedVectorDrawableCompat) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_pause_play_button, null);
+        pause = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_pause_play_button, null);
+        play = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_play_pause_button, null);
     }
 
 
@@ -98,18 +107,5 @@ public class OceanThemeActivity extends AppCompatActivity {
         }
     }
 
-
-    /**
-     * The following section contains code which will be used later on.
-     */
-
-
-    /*
-    public void animate(View view) {
-        AnimatedVectorDrawableCompat drawable = tick ? pause : play;
-        play_pause.setImageDrawable(drawable);
-        drawable.start();
-        tick = !tick;
-    }*/
 
 }
