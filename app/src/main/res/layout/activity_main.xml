@@ -5,67 +5,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/front_screen"
-    tools:context=".MainActivity">
+    android:background="@drawable/front_screen_background"
+    tools:context=".MainActivity"
+    >
 
-<!--    personal items-->
+
+    <!--    forest items -->
+
+
     <ImageView
         android:id="@+id/play_personal_theme_icon"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentLeft="false"
         android:layout_marginTop="90dp"
-        android:layout_marginEnd="278dp"
-        android:layout_marginRight="278dp"
         android:layout_marginBottom="681dp"
-        app:srcCompat="@drawable/play_button"
+        android:alpha=".85"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.977"
+        app:layout_constraintEnd_toStartOf="@+id/theme1_title"
+        app:layout_constraintHorizontal_bias="0.639"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.176" />
+        app:layout_constraintVertical_bias="0.075"
+        app:srcCompat="@drawable/custom_icon" />
 
     <TextView
         android:id="@+id/theme1_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginEnd="120dp"
         android:fontFamily="@font/open_sans_semibold"
         android:text="@string/theme1"
         android:textColor="#e0eee0"
-        android:textSize="22dp"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/play_personal_theme_icon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintVertical_bias="0.129" />
 
-    <!--    forest items -->
     <TextView
         android:id="@+id/theme2_title"
-        android:text="@string/theme2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/theme2"
         android:textColor="#e0eee0"
-        android:textSize="22dp"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.667"
+        app:layout_constraintHorizontal_bias="0.597"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.483" />
+        app:layout_constraintVertical_bias="0.49" />
 
     <ImageView
         android:id="@+id/play_forest_theme_icon2"
-        app:srcCompat="@drawable/play_button"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        app:srcCompat="@drawable/forest_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:alpha=".85"
         android:layout_alignParentLeft="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,39 +73,39 @@
         app:layout_constraintVertical_bias="0.486" />
 
 <!--    ocean items -->
+
+
     <TextView
         android:id="@+id/theme3_title"
-        android:text="@string/theme3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
         android:fontFamily="@font/open_sans_semibold"
+        android:text="@string/theme3"
         android:textColor="#e0eee0"
-        android:textSize="22dp"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toEndOf="@+id/play_ocean_them_icon3"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.839" />
+        app:layout_constraintVertical_bias="0.868" />
 
     <ImageView
         android:id="@+id/play_ocean_them_icon3"
-        app:srcCompat="@drawable/play_button"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentLeft="false"
         android:layout_marginEnd="278dp"
-        android:layout_marginRight="278dp"
         android:layout_marginBottom="88dp"
+        android:alpha=".85"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.977"
+        app:layout_constraintHorizontal_bias="0.698"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.991" />
+        app:layout_constraintVertical_bias="0.993"
+        app:srcCompat="@drawable/ocean" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

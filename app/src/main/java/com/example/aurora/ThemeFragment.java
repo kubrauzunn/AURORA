@@ -18,22 +18,26 @@ public class ThemeFragment extends Fragment {
     private View view;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, //returns all views in UI
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_theme, container, false);
-        wireUpUI();
+        setUpGUI();
         trackSoundBarProgress();
         trackBrightnessBarProgress();
         return view;
     }
 
-    //helper methods
-    void wireUpUI() {
+
+    void setUpGUI() {
         brightnessSeekBar = view.findViewById(R.id.brightnessSeekBar);
         soundSeekBar = view.findViewById(R.id.volumeSeekBar);
         bulbBrightnessIcon = view.findViewById(R.id.brightness_icon);
         volumeIcon = view.findViewById(R.id.volume_icon);
     }
+
+
+    /**
+     * Code for the volume bar which allows the user to increase or decrease the lamps volume
+     */
 
     void trackSoundBarProgress() {
         soundSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -53,6 +57,10 @@ public class ThemeFragment extends Fragment {
             }
         });
     }
+
+    /**
+     * Code for the brightness bar which allows the user to increase or decrease the lamps brightness
+     */
 
     void trackBrightnessBarProgress(){
        brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {

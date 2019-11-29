@@ -7,6 +7,7 @@
     android:background="@drawable/personal_theme_background"
     tools:context=".PersonalThemeActivity">
 
+
     <FrameLayout
         android:id="@+id/fragment_color_picker"
         android:layout_width="300dp"
@@ -27,7 +28,7 @@
         android:fontFamily="@font/open_sans_semibold"
         android:text="@string/theme1"
         android:textColor="#e0eee0"
-        android:textSize="24dp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

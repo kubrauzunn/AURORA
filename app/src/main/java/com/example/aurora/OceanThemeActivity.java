@@ -10,6 +10,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+
 public class OceanThemeActivity extends AppCompatActivity {
     private ImageView play_pause;
     private AnimatedVectorDrawable pause;
@@ -27,18 +28,6 @@ public class OceanThemeActivity extends AppCompatActivity {
     }
 
     /**
-     * Animates the play/pause buttons
-     * @param view
-     */
-
-    public void animate(View view) {
-        AnimatedVectorDrawable drawable = tick ? pause : play;
-        play_pause.setImageDrawable(drawable);
-        drawable.start();
-        tick = !tick;
-    }
-
-    /**
      * Sets up the media player for the ocean theme and play or pauses music
      */
     void setMediaPlayer(){
@@ -49,7 +38,7 @@ public class OceanThemeActivity extends AppCompatActivity {
                 if(!oceanMediaPlayer.isPlaying()){
                     oceanMediaPlayer.start();
                     animate(null);
-                } else {
+               } else {
                     oceanMediaPlayer.pause();
                     animate(null);
                 }
@@ -58,6 +47,16 @@ public class OceanThemeActivity extends AppCompatActivity {
 
     }
 
+
+
+    public void animate(View view) {
+        AnimatedVectorDrawable drawable = tick ? play : pause;
+        play_pause.setImageDrawable(drawable);
+        drawable.start();
+        tick = !tick;
+    }
+
+
     /**
      * Sets up the buttons for the media player
      */
@@ -65,7 +64,7 @@ public class OceanThemeActivity extends AppCompatActivity {
     void setUpPlayButton(){
         play_pause = findViewById(R.id.pause_play_b_ocean);
         play_pause.bringToFront();
-        pause =  (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_pause_play_button, null);
+        pause = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_pause_play_button, null);
         play = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_play_pause_button, null);
     }
 

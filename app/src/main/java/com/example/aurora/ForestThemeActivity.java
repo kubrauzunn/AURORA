@@ -4,16 +4,15 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 public class ForestThemeActivity extends AppCompatActivity {
-    private ImageView pp_button;
     private AnimatedVectorDrawable pause;
     private AnimatedVectorDrawable play;
+    private ImageView pp_button;
     private boolean tick = true;
     private static MediaPlayer forestMediaPlayer;
 
@@ -25,6 +24,21 @@ public class ForestThemeActivity extends AppCompatActivity {
         setUpPlayButton();
         setMediaPlayer();
     }
+
+
+    /**
+     *
+     * Methods related to the playing of music and play buttons
+     *
+     **/
+
+    void setUpPlayButton(){
+        pp_button = findViewById(R.id.pause_play_b_forest);
+        pp_button.bringToFront();
+        pause = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_pause_play_button, null);
+        play = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_play_pause_button, null);
+    }
+
 
 
     void setMediaPlayer(){
@@ -44,19 +58,11 @@ public class ForestThemeActivity extends AppCompatActivity {
     }
 
     public void animate(View view) {
-        AnimatedVectorDrawable drawable = tick ? pause : play;
+        AnimatedVectorDrawable drawable = tick ? play : pause ;
         pp_button.setImageDrawable(drawable);
         drawable.start();
         tick = !tick;
     }
-
-    void setUpPlayButton(){
-        pp_button = findViewById(R.id.pause_play_b_forest);
-        pp_button.bringToFront();
-        pause =  (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_pause_play_button, null);
-        play = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_play_pause_button, null);
-    }
-
 
     @Override
     protected void onPause() {
@@ -69,7 +75,14 @@ public class ForestThemeActivity extends AppCompatActivity {
             }
         }
     }
-    //fragment managing
+
+
+
+    /**
+     * Methods related to the management of fragments
+     **/
+
+
     void setFM(){
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragmentTheme = fm.findFragmentById(R.id.fragment_theme);

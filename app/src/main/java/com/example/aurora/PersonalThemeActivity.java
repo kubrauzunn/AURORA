@@ -3,18 +3,11 @@ package com.example.aurora;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-
-import android.bluetooth.BluetoothA2dp;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
-import java.util.Set;
 
 public class PersonalThemeActivity extends AppCompatActivity {
 
@@ -30,7 +23,9 @@ public class PersonalThemeActivity extends AppCompatActivity {
         setMediaPlayer();
     }
 
-    //helper methods
+    /**
+     * Sets up fragment managers
+     */
     void setFM() {
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragmentTheme = fm.findFragmentById(R.id.fragment_theme);
@@ -49,9 +44,15 @@ public class PersonalThemeActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * The following section contains code which will be implemented later on in relation to
+     * the integration of Spotify
+     */
+
     void initalizeWidgets(){
         spotifyIcon = findViewById(R.id.spotify_icon);
     }
+
 
     //for testing bluetooth connection purposes
     void setMediaPlayer() {
