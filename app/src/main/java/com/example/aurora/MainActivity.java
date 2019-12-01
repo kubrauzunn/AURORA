@@ -1,9 +1,5 @@
 package com.example.aurora;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +8,7 @@ import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
+
     private ImageView personalPeacePlayBtn;
     private ImageView forestThemePlayBtn;
     private ImageView oceanThemePlayBtn;
