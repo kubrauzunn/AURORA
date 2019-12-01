@@ -39,7 +39,7 @@
     <FrameLayout
         android:id="@+id/fragment_theme"
         android:layout_width="fill_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

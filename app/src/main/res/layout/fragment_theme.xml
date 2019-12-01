@@ -9,22 +9,22 @@
 
     <ImageView
         android:id="@+id/brightness_icon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignParentLeft="false"
+        android:src="@drawable/brightness_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/brightnessSeekBar"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.714"
-        app:srcCompat="@drawable/brightness_icon" />
+        app:layout_constraintVertical_bias="0.658" />
 
     <SeekBar
         android:id="@+id/brightnessSeekBar"
         style="@style/brightnessSeekBar"
-        android:layout_width="287dp"
-        android:layout_height="25dp"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
         android:isScrollContainer="false"
         android:longClickable="false"
         android:max="200"
@@ -36,27 +36,27 @@
         app:layout_constraintHorizontal_bias="0.67"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.712" />
+        app:layout_constraintVertical_bias="0.652" />
 
     <ImageView
         android:id="@+id/volume_icon"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:layout_alignParentLeft="false"
         android:soundEffectsEnabled="false"
+        android:src="@drawable/volume_icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/brightnessSeekBar"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/brightness_icon"
-        app:layout_constraintVertical_bias="0.3"
-        app:srcCompat="@drawable/volume_icon" />
+        app:layout_constraintVertical_bias="0.657" />
 
     <SeekBar
         android:id="@+id/volumeSeekBar"
         style="@style/soundSeekBar"
-        android:layout_width="295dp"
-        android:layout_height="42dp"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
         android:isScrollContainer="false"
         android:longClickable="false"
         android:max="200"
@@ -65,12 +65,15 @@
         android:theme="@style/soundSeekBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.663"
+        app:layout_constraintHorizontal_bias="0.67"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/brightnessSeekBar"
-        app:layout_constraintVertical_bias="0.406" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.891" />
     <!-- android:progressDrawable="@drawable/custom_seekbar_progress"
      android:thumb="@drawable/custom_seekbar_thumb"
     -->
+       />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
