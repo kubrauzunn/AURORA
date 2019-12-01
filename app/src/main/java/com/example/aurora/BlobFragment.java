@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+
 import androidx.fragment.app.Fragment;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
@@ -23,6 +25,7 @@ public class BlobFragment extends Fragment {
         return v;
 
     }
+
 }
 
 

@@ -1,14 +1,14 @@
 package com.example.aurora;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 public class MainActivity extends AppCompatActivity {
+
     private ImageView personalPeacePlayBtn;
     private ImageView forestThemePlayBtn;
     private ImageView oceanThemePlayBtn;
@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView theme1;
     private TextView theme2;
     private TextView theme3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
