@@ -28,7 +28,7 @@ public class ForestThemeActivity extends BluetoothConnection {
         pp_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!forestMediaPlayer.isPlaying()){
+                if (!forestMediaPlayer.isPlaying()) {
                     forestMediaPlayer.start();
                     animate(null);
                     (new Thread(new workerThread("3"))).start(); //THIS WILL START THE FOREST LIGHTS

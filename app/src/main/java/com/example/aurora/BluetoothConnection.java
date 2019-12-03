@@ -21,6 +21,7 @@ public class BluetoothConnection extends AppCompatActivity {
     private static final String TAG = "OCEAN THEME";
     private String btMsg;
     private BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    OutputStream outputStream;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,29 +72,29 @@ public class BluetoothConnection extends AppCompatActivity {
      * @param msg
      */
 
-    public void send(String msg) {
-        OutputStream outputStream;
-        UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-        try {
-            socket = (BluetoothSocket) connect_device.getClass().getMethod("createRfcommSocket", new Class[]{int.class}).invoke(connect_device, 1);
-            //socket = connect_device.createInsecureRfcommSocketToServiceRecord(uuid);
-            if (!socket.isConnected()) {
-                socket.connect();
+        public void send(String msg) {
+            OutputStream outputStream;
+            UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+            try {
+                socket = (BluetoothSocket) connect_device.getClass().getMethod("createRfcommSocket", new Class[]{int.class}).invoke(connect_device, 1);
+                //socket = connect_device.createInsecureRfcommSocketToServiceRecord(uuid);
+                if (!socket.isConnected()) {
+                    socket.connect();
+                }
+
+                outputStream = socket.getOutputStream();
+                outputStream.write(msg.getBytes());
+
+            } catch (IOException e) {
+                Log.e(TAG, "Error creating socket");
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
             }
-
-            outputStream = socket.getOutputStream();
-            outputStream.write(msg.getBytes());
-
-        } catch (IOException e) {
-            Log.e(TAG, "Error creating socket");
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        }
 
 
        /* try {
@@ -114,5 +115,5 @@ public class BluetoothConnection extends AppCompatActivity {
                 Log.e(TAG, "Couldn't establish Bluetooth connection!");
             }
         }*/
-    }
+        }
 }
