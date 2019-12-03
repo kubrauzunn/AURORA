@@ -2,27 +2,47 @@ package com.example.aurora;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-public class ForestThemeActivity extends AppCompatActivity {
+public class ForestThemeActivity extends BluetoothConnection {
     private AnimatedVectorDrawable pause;
     private AnimatedVectorDrawable play;
     private ImageView pp_button;
     private boolean tick = true;
     private static MediaPlayer forestMediaPlayer;
+    private static final String TAG = "FOREST THEME";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forest_theme);
-        setFM();
         setUpPlayButton();
         setMediaPlayer();
+        setFM();
+
+        pp_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!forestMediaPlayer.isPlaying()){
+                    forestMediaPlayer.start();
+                    animate(null);
+                    (new Thread(new workerThread("3"))).start(); //THIS WILL START THE FOREST LIGHTS
+                    Log.d(TAG, "MESSAGE START FROM FOREST THEME");
+
+                } else {
+                    forestMediaPlayer.pause();
+                    animate(null);
+                    (new Thread(new workerThread("4"))).start(); //THIS WILL STOP THE FOREST LIGHTS
+                    Log.d(TAG, "MESSAGE STOP FROM FOREST THEME");
+                }
+            }
+        });
+
     }
 
 
@@ -40,21 +60,12 @@ public class ForestThemeActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Sets up the media player for the ocean theme and play or pauses music
+     */
     void setMediaPlayer(){
+        Log.d(TAG,"MEDIA PLAYER STARTED");
         forestMediaPlayer = MediaPlayer.create(this, R.raw.forest_sounds);
-        pp_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(!forestMediaPlayer.isPlaying()){
-                    forestMediaPlayer.start();
-                    animate(null);
-                } else {
-                    forestMediaPlayer.pause();
-                    animate(null);
-                }
-            }
-        });
     }
 
     public void animate(View view) {
@@ -77,11 +88,9 @@ public class ForestThemeActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * Methods related to the management of fragments
      **/
-
 
     void setFM(){
         FragmentManager fm = getSupportFragmentManager();
