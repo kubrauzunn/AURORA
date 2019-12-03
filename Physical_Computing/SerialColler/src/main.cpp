@@ -57,7 +57,7 @@ void loop() {
 
   // Si hay informacion disponible en el puerto serie la utilizamos:
   while (Serial.available() > 0) {
-     int val = Serial.p
+    
      value = Serial.parseInt();
 
   }
