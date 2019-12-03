@@ -1,10 +1,14 @@
 package com.example.aurora;
+import android.content.Context;
 import android.graphics.drawable.AnimatedVectorDrawable;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -16,6 +20,9 @@ public class ForestThemeActivity extends BluetoothConnection {
     private boolean tick = true;
     private static MediaPlayer forestMediaPlayer;
     private static final String TAG = "FOREST THEME";
+    private SeekBar soundSeekBar;
+    AudioManager audioManager;
+    int volume;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +31,10 @@ public class ForestThemeActivity extends BluetoothConnection {
         setUpPlayButton();
         setMediaPlayer();
         setFM();
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        setSoundSeekBar();
+        trackSoundBarProgress();
+        initVolControl();
 
         pp_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +97,39 @@ public class ForestThemeActivity extends BluetoothConnection {
             }
         }
     }
+
+    void initVolControl() {
+        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        soundSeekBar.setMax(audioManager
+                .getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        soundSeekBar.setProgress(audioManager
+                .getStreamVolume(AudioManager.STREAM_MUSIC));
+    }
+
+    void setSoundSeekBar() {
+        soundSeekBar = findViewById(R.id.volumeSeekBar);
+    }
+
+    void trackSoundBarProgress() {
+        soundSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
+                volume = progress;
+                //send volume
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                //code to come
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                //Toast.makeText(getApplicationContext(), "Volume: " + Integer.toString(volume), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
 
     /**

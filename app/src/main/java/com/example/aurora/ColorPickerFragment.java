@@ -1,8 +1,10 @@
 package com.example.aurora;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.NumberPicker;
 
 import com.larswerkman.holocolorpicker.ColorPicker;
 
@@ -25,10 +27,9 @@ import androidx.fragment.app.Fragment;
  */
 
 
-public class ColorPickerFragment extends Fragment {
+public class ColorPickerFragment extends Fragment implements ColorPicker.OnColorChangedListener {
 
     View view;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, //return all views in UI
@@ -40,19 +41,58 @@ public class ColorPickerFragment extends Fragment {
         return view;
     }
 
-    public void getColorPicker(){
-        ColorPicker picker = (ColorPicker) view.findViewById(R.id.picker);
+    public void getColorPicker() {
+        final ColorPicker picker = (ColorPicker) view.findViewById(R.id.picker);
         view.findViewById(R.id.picker);
         //To get the color
+
         picker.getColor();
+        int curColor;
+        int red = Color.red(picker.getColor());
+        int green = Color.green(picker.getColor());
+        int blue = Color.blue(picker.getColor());
+        curColor = Color.rgb(red, green, blue);
+        System.out.println("color picker color " + picker.getColor() + "cur rgb " + curColor );
 
         //To set the old selected color u can do it like this
         picker.setOldCenterColor(picker.getColor());
         //adds listener to the colorpicker which is implemented in the activity
-        //picker.setOnColorChangedListener((ColorPicker.OnColorChangedListener) this);
+        picker.setOnColorChangedListener(this);
 
         //to turn of showing the old color
         picker.setShowOldCenterColor(false);
+
+
+        picker.setOnColorChangedListener(new ColorPicker.OnColorChangedListener() {
+            @Override
+            public void onColorChanged(int color) {
+               int green = Color.green(color);
+               int red = Color.red(color);
+               int blue = Color.blue(color);
+
+
+               int pickedColor = Color.rgb(red, green, blue);
+
+                System.out.println("red " + red + " gr " + green + " blue " + blue );
+                System.out.println("picked color" + pickedColor);
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onColorChanged(int color) {
+        int green = Color.green(color);
+        int red = Color.red(color);
+        int blue = Color.blue(color);
+
+
+        int pickedColor = Color.rgb(red, green, blue);
+        System.out.println("red " + red + " gr " + green + " blue " + blue );
+        System.out.println("picked color" + pickedColor);
+
+        //thread.send (red x, green y, blue z)
     }
 
 

@@ -21,7 +21,7 @@ public class ThemeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_theme, container, false);
         setUpGUI();
-        trackSoundBarProgress();
+       // trackSoundBarProgress();
         trackBrightnessBarProgress();
         return view;
     }
@@ -29,7 +29,7 @@ public class ThemeFragment extends Fragment {
 
     void setUpGUI() {
         brightnessSeekBar = view.findViewById(R.id.brightnessSeekBar);
-        soundSeekBar = view.findViewById(R.id.volumeSeekBar);
+        //soundSeekBar = view.findViewById(R.id.volumeSeekBar);
         bulbBrightnessIcon = view.findViewById(R.id.brightness_icon);
         volumeIcon = view.findViewById(R.id.volume_icon);
     }
@@ -39,7 +39,7 @@ public class ThemeFragment extends Fragment {
      * Code for the volume bar which allows the user to increase or decrease the lamps volume
      */
 
-    void trackSoundBarProgress() {
+   /* void trackSoundBarProgress() {
         soundSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
@@ -56,7 +56,7 @@ public class ThemeFragment extends Fragment {
                 //come to come
             }
         });
-    }
+    }*/
 
     /**
      * Code for the brightness bar which allows the user to increase or decrease the lamps brightness
@@ -68,7 +68,7 @@ public class ThemeFragment extends Fragment {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 //brightnessChangedVal = progress;
-                // code to come
+                
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
