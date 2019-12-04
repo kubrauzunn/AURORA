@@ -1,17 +1,17 @@
 package com.example.aurora;
-
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.larswerkman.holocolorpicker.ColorPicker;
 
@@ -19,24 +19,23 @@ import com.larswerkman.holocolorpicker.ColorPicker;
 public class PersonalThemeActivity extends BluetoothConnection implements ColorPicker.OnColorChangedListener {
 
     private ImageView spotifyIcon;
-    private static MediaPlayer oceanMediaPlayer;
     private SeekBar soundSeekBar;
-    AudioManager audioManager;
-    int volume;
+    private AudioManager audioManager;
+    private int volume;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_theme);
-        initalizeWidgets();
+        initWidgets();
         setFM();
-        setMediaPlayer();
+        startSoundCloud();
+        startSpotify();
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         setSoundSeekBar();
         trackSoundBarProgress();
         initVolControl();
-
         getColorPicker();
     }
 
@@ -64,8 +63,6 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
     public void getColorPicker() {
         final ColorPicker picker = (ColorPicker) findViewById(R.id.picker);
         findViewById(R.id.picker);
-        //To get the color
-
         picker.getColor();
         int curColor;
         int red = Color.red(picker.getColor());
@@ -109,7 +106,7 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
     }
 
     @Override
-    public void onColorChanged(int color) {
+   public void onColorChanged(int color) {
        /* int green = Color.green(color);
         int red = Color.red(color);
         int blue = Color.blue(color);
@@ -136,7 +133,7 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
         //thread.send (red x, green y, blue z)
     }
 
-    void initalizeWidgets(){
+    void initWidgets(){
         spotifyIcon = findViewById(R.id.spotify_icon);
     }
 
@@ -179,35 +176,36 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
      * the integration of Spotify
      */
 
-    //for testing bluetooth connection purposes
-    // should have SPOTIFY intent here
-    void setMediaPlayer() {
-        oceanMediaPlayer = MediaPlayer.create(this, R.raw.forest_sounds);
+    void startSpotify() {
         spotifyIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!oceanMediaPlayer.isPlaying()) {
-                    oceanMediaPlayer.start();
-
+                final Intent spotify_intent = new Intent(Intent.ACTION_MAIN);
+                spotify_intent.setComponent(new ComponentName("com.spotify.music", "com.spotify.music.MainActivity"));
+                if (spotify_intent != null) {
+                    startActivity(spotify_intent);
                 } else {
-                    oceanMediaPlayer.pause();
-
+                    Toast.makeText(PersonalThemeActivity.this, "You need to have Spotify installed on the phone", Toast.LENGTH_LONG).show();
                 }
             }
         });
 
     }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (oceanMediaPlayer != null) {
-            oceanMediaPlayer.pause();
-            if (isFinishing()) {
-                oceanMediaPlayer.stop();
-                oceanMediaPlayer.release();
+
+
+    void startSoundCloud() {
+        spotifyIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Intent soundCloud_intent = new Intent(Intent.ACTION_MAIN);
+                soundCloud_intent.setComponent(new ComponentName("com.soundcloud.android", "com.soundcloud.android.PersonalThemeActivity"));
+                if (soundCloud_intent != null) {
+                    startActivity(soundCloud_intent);
+                } else {
+                    Toast.makeText(PersonalThemeActivity.this, "You need to have SoundCloud installed on the phone", Toast.LENGTH_LONG).show();
+                }
             }
-        }
+        });
+
     }
-
-
 }

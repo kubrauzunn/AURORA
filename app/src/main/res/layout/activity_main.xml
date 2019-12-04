@@ -10,6 +10,7 @@
     >
 
     <!--    forest items -->
+
     <ImageView
         android:id="@+id/play_personal_theme_icon"
         android:layout_width="40dp"
@@ -20,10 +21,10 @@
         android:alpha=".75"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/theme1_title"
-        app:layout_constraintHorizontal_bias="0.639"
+        app:layout_constraintHorizontal_bias="0.644"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.129"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/custom_icon" />
 
     <TextView
@@ -40,6 +41,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.129" />
 
+    <!--    ocean items -->
+
     <TextView
         android:id="@+id/theme2_title"
         android:layout_width="wrap_content"
@@ -53,9 +56,8 @@
         app:layout_constraintHorizontal_bias="0.593"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.568" />
+        app:layout_constraintVertical_bias="0.523" />
 
-    <!--    ocean items -->
     <ImageView
         android:id="@+id/play_forest_theme_icon2"
         android:layout_width="40dp"
@@ -64,10 +66,10 @@
         android:alpha=".75"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.787"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toEndOf="@+id/theme2_title"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.561"
+        app:layout_constraintVertical_bias="0.528"
         app:srcCompat="@drawable/forest_icon" />
 
     <TextView
@@ -97,7 +99,7 @@
         android:alpha=".75"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.827"
+        app:layout_constraintHorizontal_bias="0.849"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"

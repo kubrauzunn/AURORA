@@ -64,8 +64,8 @@
     <SeekBar
         android:id="@+id/volumeSeekBar"
         style="@style/soundSeekBar"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
+        android:layout_width="286dp"
+        android:layout_height="36dp"
         android:layout_marginTop="76dp"
         android:isScrollContainer="false"
         android:longClickable="false"
