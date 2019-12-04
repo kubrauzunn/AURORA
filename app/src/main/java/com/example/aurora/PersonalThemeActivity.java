@@ -19,6 +19,7 @@ import com.larswerkman.holocolorpicker.ColorPicker;
 public class PersonalThemeActivity extends BluetoothConnection implements ColorPicker.OnColorChangedListener {
 
     private ImageView spotifyIcon;
+    //private ImageView soundCloudIcon;
     private SeekBar soundSeekBar;
     private AudioManager audioManager;
     private int volume;
@@ -30,7 +31,7 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
         setContentView(R.layout.activity_personal_theme);
         initWidgets();
         setFM();
-        startSoundCloud();
+        //startSoundCloud();
         startSpotify();
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         setSoundSeekBar();
@@ -135,6 +136,7 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
 
     void initWidgets(){
         spotifyIcon = findViewById(R.id.spotify_icon);
+        //soundCloudIcon = findViewById(R.id.soundcloud_icon);
     }
 
     void initVolControl() {
@@ -193,12 +195,12 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
     }
 
 
-    void startSoundCloud() {
-        spotifyIcon.setOnClickListener(new View.OnClickListener() {
+   /* void startSoundCloud() {
+        soundCloudIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Intent soundCloud_intent = new Intent(Intent.ACTION_MAIN);
-                soundCloud_intent.setComponent(new ComponentName("com.soundcloud.android", "com.soundcloud.android.PersonalThemeActivity"));
+                soundCloud_intent.setComponent(new ComponentName("com.soundcloud.android", "com.soundcloud.android.MainActivity"));
                 if (soundCloud_intent != null) {
                     startActivity(soundCloud_intent);
                 } else {
@@ -207,5 +209,5 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
             }
         });
 
-    }
+    }*/
 }

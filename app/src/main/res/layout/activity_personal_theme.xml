@@ -63,20 +63,7 @@
     </FrameLayout>
 
 
-    <ImageView
-        android:id="@+id/spotify_icon"
-        android:layout_width="40dp"
-        android:layout_height="35dp"
-        android:layout_alignParentLeft="true"
-        android:alpha=".75"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.423"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.938"
-        app:srcCompat="@drawable/spotify" />
-
+    <!--
     <ImageView
         android:id="@+id/soundcloud_icon"
         android:layout_width="37dp"
@@ -90,6 +77,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.94"
         app:srcCompat="@drawable/soundcloud" />
+-->
+    <ImageView
+        android:id="@+id/spotify_icon"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:alpha=".75"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.936"
+        app:srcCompat="@drawable/spotify" />
 
     <SeekBar
         android:id="@+id/volumeSeekBar"
