@@ -23,6 +23,7 @@ public class ForestThemeActivity extends BluetoothConnection {
     private SeekBar soundSeekBar;
     AudioManager audioManager;
     int volume;
+    private SeekBar brightnessSeekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,8 @@ public class ForestThemeActivity extends BluetoothConnection {
         setSoundSeekBar();
         trackSoundBarProgress();
         initVolControl();
+        setBrightnessBar();
+        trackBrightnessBarProgress();
 
         pp_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +112,9 @@ public class ForestThemeActivity extends BluetoothConnection {
     void setSoundSeekBar() {
         soundSeekBar = findViewById(R.id.volumeSeekBar);
     }
+    void setBrightnessBar() {
+        brightnessSeekBar = findViewById(R.id.brightnessSeekBar);
+    }
 
     void trackSoundBarProgress() {
         soundSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -130,6 +136,34 @@ public class ForestThemeActivity extends BluetoothConnection {
         });
     }
 
+    /**
+     * Code for the brightness bar which allows the user to increase or decrease the lamps brightness
+     */
+
+    void trackBrightnessBarProgress(){
+        brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                StringBuilder sb = new StringBuilder();
+                sb.append(" " + progress );
+                String s = sb.toString();
+                System.out.println("brightness " + s);
+
+                (new Thread(new workerThread("brightness send" + s ))).start(); //THIS WILL START THE OCEAN LIGHTS
+                Log.d(TAG, "MESSAGE START FROM OCEAN THEME");
+
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+    }
 
 
     /**
@@ -138,13 +172,13 @@ public class ForestThemeActivity extends BluetoothConnection {
 
     void setFM(){
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragmentTheme = fm.findFragmentById(R.id.fragment_theme);
+       /* Fragment fragmentTheme = fm.findFragmentById(R.id.fragment_theme);
         if (fragmentTheme == null) {
             fragmentTheme = new ThemeFragment();
             fm.beginTransaction()
                     .add(R.id.fragment_theme, fragmentTheme)
                     .commit();
-        }
+        }*/
 
         Fragment fragmentBlob = fm.findFragmentById(R.id.blob_fragment);
         if (fragmentBlob == null) {

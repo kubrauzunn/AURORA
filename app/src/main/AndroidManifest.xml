@@ -16,18 +16,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OceanThemeActivity"></activity>
-        <activity android:name=".ForestThemeActivity" />
-        <activity android:name=".PersonalThemeActivity" />
-        <activity android:name=".BluetoothConnection" />
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".OceanThemeActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ForestThemeActivity"
+            android:screenOrientation="portrait"/>
+
+
+        <activity
+            android:name=".PersonalThemeActivity"
+            android:screenOrientation="portrait" />
+
+
+
+        <activity
+            android:name=".BluetoothConnection"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

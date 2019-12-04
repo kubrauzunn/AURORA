@@ -22,7 +22,7 @@ public class ThemeFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_theme, container, false);
         setUpGUI();
        // trackSoundBarProgress();
-        trackBrightnessBarProgress();
+        //trackBrightnessBarProgress();
         return view;
     }
 
@@ -58,28 +58,6 @@ public class ThemeFragment extends Fragment {
         });
     }*/
 
-    /**
-     * Code for the brightness bar which allows the user to increase or decrease the lamps brightness
-     */
 
-    void trackBrightnessBarProgress(){
-       brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int brightnessChangedVal;
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                //brightnessChangedVal = progress;
-                
-            }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                //code to come
-            }
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                //come to come
-            }
-        });
-
-    }
 
 }

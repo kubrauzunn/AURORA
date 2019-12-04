@@ -20,23 +20,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.658" />
 
-    <SeekBar
-        android:id="@+id/brightnessSeekBar"
-        style="@style/brightnessSeekBar"
-        android:layout_width="286dp"
-        android:layout_height="36dp"
-        android:isScrollContainer="false"
-        android:longClickable="false"
-        android:max="200"
-        android:paddingTop="0dp"
-        android:progress="90"
-        android:theme="@style/brightnessSeekBar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.67"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.652" />
 
     <ImageView
         android:id="@+id/volume_icon"
