@@ -1,0 +1,82 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="play_pause_button"
+            android:width="24dp"
+            android:height="24dp"
+            android:viewportWidth="24"
+            android:viewportHeight="24">
+            <path
+                android:name="path_1"
+                android:pathData="M 0.101 11.965 C 0.101 5.356 5.398 0 11.933 0 C 18.467 0 23.765 5.356 23.765 11.965 C 23.765 18.576 18.467 23.933 11.933 23.933 C 5.398 23.933 0.101 18.576 0.101 11.965 Z"
+                android:fillColor="#db4488"
+                android:fillAlpha="0.8"
+                android:strokeWidth="0.1"/>
+            <group android:name="group">
+                <path
+                    android:name="bar_vert_01"
+                    android:pathData="M 7 6.033 L 7 6.016 L 17 11.984 L 17 12 L 7 12"
+                    android:fillColor="#fff"/>
+                <path
+                    android:name="bar_vert_02"
+                    android:pathData="M 7 12 L 7 17.984 L 7.055 17.984 L 17 12 L 7 12"
+                    android:fillColor="#fff"/>
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="bar_vert_01">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:propertyName="pathData"
+                    android:duration="50"
+                    android:valueFrom="M 7 6 L 7 6 L 17 12 L 17 12 L 7 12"
+                    android:valueTo="M 7 12 L 7 9 L 17 9 L 17 12 L 7 12"
+                    android:valueType="pathType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+                <objectAnimator
+                    android:propertyName="pathData"
+                    android:startOffset="50"
+                    android:duration="300"
+                    android:valueFrom="M 7 12 L 7 9 L 17 9 L 17 12 L 7 12"
+                    android:valueTo="M 10.5 18 L 7.5 18 L 7.5 6 L 10.5 6 L 10.5 18"
+                    android:valueType="pathType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="bar_vert_02">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:propertyName="pathData"
+                    android:duration="50"
+                    android:valueFrom="M 7 12 L 7 18 L 7 18 L 17 12 L 7 12"
+                    android:valueTo="M 7 12 L 7 15 L 17 15 L 17 12 L 7 12"
+                    android:valueType="pathType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+                <objectAnimator
+                    android:propertyName="pathData"
+                    android:startOffset="50"
+                    android:duration="300"
+                    android:valueFrom="M 7 12 L 7 15 L 17 15 L 17 12 L 7 12"
+                    android:valueTo="M 13.5 18 L 16.5 18 L 16.5 6 L 13.5 6 L 13.5 18"
+                    android:valueType="pathType"
+                    android:interpolator="@android:interpolator/fast_out_slow_in"/>
+            </set>
+        </aapt:attr>
+    </target>
+    <target android:name="group">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:propertyName="translateX"
+                android:duration="300"
+                android:valueFrom="1.2"
+                android:valueTo="0"
+                android:valueType="floatType"
+                android:interpolator="@android:interpolator/fast_out_slow_in"/>
+        </aapt:attr>
+    </target>
+</animated-vector>
