@@ -26,6 +26,8 @@ public class OceanThemeActivity extends BluetoothConnection {
     private SeekBar soundSeekBar;
     AudioManager audioManager;
     int volume;
+    private SeekBar brightnessSeekBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +36,14 @@ public class OceanThemeActivity extends BluetoothConnection {
         setUpPlayButton();
         setMediaPlayer();
         setFM();
+
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         setSoundSeekBar();
         trackSoundBarProgress();
         initVolControl();
+
+        setBrightnessBar();
+        trackBrightnessBarProgress();
 
         play_pause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +123,9 @@ public class OceanThemeActivity extends BluetoothConnection {
     void setSoundSeekBar() {
         soundSeekBar = findViewById(R.id.volumeSeekBar);
     }
-
+    void setBrightnessBar() {
+        brightnessSeekBar = findViewById(R.id.brightnessSeekBar);
+    }
 
     void trackSoundBarProgress() {
         soundSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -139,6 +147,38 @@ public class OceanThemeActivity extends BluetoothConnection {
         });
     }
 
+    /**
+     * Code for the brightness bar which allows the user to increase or decrease the lamps brightness
+     */
+
+    void trackBrightnessBarProgress(){
+        brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                StringBuilder sb = new StringBuilder();
+                sb.append(" " + progress );
+                String s = sb.toString();
+                System.out.println("brightness " + s);
+
+
+                (new Thread(new workerThread("brightness send" + s ))).start(); //THIS WILL START THE OCEAN LIGHTS
+                Log.d(TAG, "MESSAGE START FROM OCEAN THEME");
+
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                //code to come
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                //come to come
+            }
+        });
+
+    }
+
 
     /**
      * Set up fragment managers
@@ -146,13 +186,13 @@ public class OceanThemeActivity extends BluetoothConnection {
     void setFM(){
         Log.d(TAG,"FRAGMENTS SET UP");
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_theme);
+       /* Fragment fragment = fm.findFragmentById(R.id.fragment_theme);
         if (fragment == null) {
             fragment = new ThemeFragment();
             fm.beginTransaction()
                     .add(R.id.fragment_theme, fragment)
                     .commit();
-        }
+        }*/
         Fragment fragmentBlob = fm.findFragmentById(R.id.fragment_blob);
         if (fragmentBlob == null) {
             fragmentBlob = new BlobFragment();

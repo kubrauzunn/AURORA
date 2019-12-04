@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -22,7 +23,7 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
     private SeekBar soundSeekBar;
     private AudioManager audioManager;
     private int volume;
-
+    private SeekBar brightnessSeekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,9 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
         trackSoundBarProgress();
         initVolControl();
         getColorPicker();
+        setBrightnessBar();
+        trackBrightnessBarProgress();
+
     }
 
     /**
@@ -44,20 +48,13 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
      */
     void setFM() {
         FragmentManager fm = getSupportFragmentManager();
-        Fragment fragmentTheme = fm.findFragmentById(R.id.fragment_theme);
+       /* Fragment fragmentTheme = fm.findFragmentById(R.id.fragment_theme);
         if (fragmentTheme == null) {
             fragmentTheme = new ThemeFragment();
             fm.beginTransaction()
                     .add(R.id.fragment_theme, fragmentTheme)
                     .commit();
-        }
-       /* Fragment fragmentBlob = fm.findFragmentById(R.id.fragment_color_picker);
-        if (fragmentBlob == null) {
-            fragmentBlob = new ColorPickerFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragment_color_picker, fragmentBlob)
-                    .commit();
-        } */
+        }*/
     }
 
     public void getColorPicker() {
@@ -107,34 +104,42 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
 
     @Override
    public void onColorChanged(int color) {
-       /* int green = Color.green(color);
-        int red = Color.red(color);
-        int blue = Color.blue(color);
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("");
-        sb.append(red + "," + green + "," + blue );
-        String s = sb.toString();
-
-        System.out.println("picked color " + s);
-
-
-        (new Thread (new workerThread(s))).start();
-        System.out.println("has sent thread");
-*/
-      /*  int green = Color.green(color);
-        int red = Color.red(color);
-        int blue = Color.blue(color);
-
-
-        int pickedColor = Color.rgb(red, green, blue);*/
-       //System.out.println("picked color" + pickedColor);
-
-        //thread.send (red x, green y, blue z)
+     //needed to be overwritten
     }
 
     void initWidgets(){
         spotifyIcon = findViewById(R.id.spotify_icon);
+    }
+
+    void setBrightnessBar() {
+        brightnessSeekBar = findViewById(R.id.brightnessSeekBar);
+    }
+    /**
+     * Code for the brightness bar which allows the user to increase or decrease the lamps brightness
+     */
+
+    void trackBrightnessBarProgress(){
+        brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                StringBuilder sb = new StringBuilder();
+                sb.append(" " + progress );
+                String s = sb.toString();
+                System.out.println("brightness " + s);
+
+                (new Thread(new workerThread("brightness send" + s ))).start(); //THIS WILL START THE OCEAN LIGHTS
+
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
     }
 
     void initVolControl() {
