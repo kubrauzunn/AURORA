@@ -8,7 +8,7 @@ CRGB leds[NUM_LEDS];
 AdjGraph G; 
 
 
-int Ld[] = {63,64,76,77,62,50,49,48,65,75,90,
+/*int Ld[] = {63,64,76,77,62,50,49,48,65,75,90,
             89,88,78,61,51,36,37,38,39,47,66,
             74,91,99,100,101,102,87,79,60,52,
             35,26,25,24,23,22,40,46,67,73,
@@ -33,35 +33,40 @@ int Ld[] = {63,64,76,77,62,50,49,48,65,75,90,
                      {-1,-1,115,114,113,112,111,110,109,108,107,106,-1},
                      {-1,-1,116,117,118,118,-1,-1,-1,-1,-1,-1,-1} };*/
 
-int sensorValues[][2] = { {750,770},
-                          {690,720},
-                          {360,360},
-                          {150,170},
-                          {62,100},
-                          {265,275},
-                          {265,275},
-                          {510,520},
-                          {338,345},
-                          {500,530},
-                          {590,600}};
+int sensorLEDS[][2] = {   {82,84},
+                          {107,86},
+                          {117,99},
+                          {97,91},
+                          {67,65},
+                          {19,20},
+                          {0,15},
+                          {4,25},
+                          {9,28},
+                          {30,34}};
+                    
 
 
-int sensorLEDS[][2] = { {4, 26},
-                        {1, 23},
-                        {21,39},
-                        {67,64},
-                        {95,91},
-                        {112,99},
-                        {110,89},
-                        {83,78},
-                        {54,51},
-                        {9,38}};
+int sensorValues[][4] = { {40, 60,300,318},
+                        {40,60,509,515},
+                        {40,60,80,90},
+                        {40,60,140,145},
+                        {40,60,155,165},
+                        {40,60,300,400},
+                        {45,60,710,715},
+                        {230,260,735,755},
+                        {40,50,600,620},
+                        {40,60,530,540}};
 
                          
 
 int sensorsAnalog[] = {A0,A1,A2,A3,A4,A5,A6,A7,A10,A11};  
-int sensors[] = {22,24,26,28,30,32,34,36,40,42};       
-int theme;
+int sensors[] = {22,24,26,28,30,32,34,36,40,42};
+int sensor = 0; // index of sensor to activate       
+int serialVal;
+int brightness = 50;
+int period = 1000;
+unsigned long time_now = 0;
+
 
 void setup() {
   FastLED.addLeds<WS2812, LED_PIN, GRB>(leds, NUM_LEDS);
@@ -78,22 +83,16 @@ void setup() {
   pinMode(36,OUTPUT);
   pinMode(40,OUTPUT);
   pinMode(42,OUTPUT);
+
+  serialVal = 0;
  
+ 
+
   
 
 }
 
-/*void fade(){
-     
-      brightness = brightness + fadeAmount;
-      // reverse the direction of the fading at the ends of the fade: 
-      if(brightness == 0 || brightness == 240)
-      {
-        fadeAmount = -fadeAmount ; 
-      }    
-      delay(80);  // This delay sets speed of the fade. I usually do from 5-75 but you can always go higher.
-    
-}*/
+
 
 /*void iterate2(int s, int r, int g, int b){
 
@@ -113,8 +112,8 @@ void setup() {
     indx += 2;
     
     leds[led] = CRGB (r,g,b);
-    leds[led].fadeLightBy(brightness);
     FastLED.show();
+    delay(40);
 
     
     
@@ -123,11 +122,11 @@ void setup() {
     Serial.print("2 ");
     Serial.println(next[i]);
     leds[next[i]] = CRGB (r,g,b); 
-    leds[Ld[i]].fadeLightBy(brightness);
     FastLED.show();
+    delay(40);
   
   }
-}*/
+}
 
 /*void start(int s){
   int count = 1; 
@@ -166,15 +165,38 @@ void iterate1(int s, int r, int g, int b){
   for(int i = 0; i < 7; i++){
      int led = G.getLED(s,i);
      leds[led] = CRGB (r,g,b);
+     FastLED.show();
+      delay(30);
   }
-  // delay(1000);
+  
 }
 
 int reactToTouch(int sens,int v){
 
- if   (v > 40 && v < 60)  return sensorLEDS[sens][0];
- if   (v > sensorValues[sens][0] && v < sensorValues[sens][1]) return sensorLEDS[sens][1];
+ if   (v > sensorValues[sens][0]&& v < sensorValues[sens][1])  return sensorLEDS[sens][0];
+ if   (v > sensorValues[sens][2] && v < sensorValues[sens][3]) return sensorLEDS[sens][1];
  else return -1;
+}
+
+int activateSensor(int r, int g, int b){
+     if(sensor == 10) sensor = 0;
+     digitalWrite(sensors[sensor],HIGH);  
+     int x = analogRead(sensorsAnalog[sensor]);
+    
+    int led = reactToTouch(sensor,x);
+   // Serial.println(led);
+   /*  Serial.print("Sensor A9 ");
+     Serial.println();
+     Serial.print("analogRead ");
+     Serial.println(x);
+     Serial.print("Led " );
+     Serial.println(led);
+     Serial.println();
+   
+      delay(500);*/
+    if (led != -1)iterate1(led,r,g,b);    
+    sensor++;
+    
 }
 
 void wheel(int led, int pos){
@@ -197,41 +219,114 @@ void wheel(int led, int pos){
 
 void rainbow(){
 
-  int sens = 0;
+  
   for(int j = 0; j < 256; j++){
     for(int i = 0; i < 120; i++){
-      digitalWrite(sensors[sens],HIGH);  
-   //   Serial.print(sens);
-    //  Serial.print(" ");
-     int x = analogRead(sensorsAnalog[sens]);
-  /*  Serial.println(sens);
-     Serial.println(x);
-     
-     delay(1000);*/
-    int led = reactToTouch(sens,x);
-    /* Serial.println(led);
-     Serial.println();*/
-    if (led != -1)  iterate1(led,255,0,0);
-    sens++;
-    if(sens == 10) sens = 0;
+    activateSensor(255,0,0);
     wheel(i,(i+j) & 255);
   }
-   FastLED.show();
-   delay(30);
+   /*FastLED.show();
+   delay(30);*/
     
   }
 }
 
+void oceanWheel(int led, int pos){
+    if(pos < 85){
+      leds[led].setRGB(0,255-pos*3,255);
+ 
+    }else if(pos < 128){
+      pos -=85;
+      leds[led].setRGB(pos*2,0,255);
+
+    }else if(pos < 170){
+      pos-=128;
+      leds[led].setRGB(85-pos*2,0,255);
+      
+    }else{
+      pos -= 170;
+      leds[led].setRGB(0,pos*3,255);
+   
+    }
+}
+
+
+void forestWheel(int led, int pos){
+
+     if(pos < 85){
+       leds[led].setRGB(255-pos*3,200,20);
+  
+     }else if(pos < 128){
+       pos -=85;
+       leds[led].setRGB(pos*6,200,20);
+   
+     }else if(pos < 170){
+       pos-=128;
+  
+       leds[led].setRGB(255-pos*6,200,20);
+     }else{
+       pos -= 170;
+       leds[led].setRGB(pos*3,200,20);
+     }
+}
+
+void theme(int theme){
+  boolean on = false;
+  int t = theme;
+  for(int j = 0; j<256;j++){
+   
+      
+     time_now = millis();
+     for(int i = 0; i < 120; i++){
+     if(t == 1){
+      activateSensor(255, 145, 200); 
+      oceanWheel(i,(i+j) & 255);
+     }else if(t == 3){
+      activateSensor(247, 118, 62); 
+      forestWheel(i,(i+j) & 255);
+     }
+
+     }
+    if(!on) fadeIn(); on = true;
+    FastLED.show();
+     
+  //  delay(50);
+    }
+    
+}
+
+void fadeIn(){
+  for(int i = 0; i <= brightness; i++){
+    FastLED.setBrightness(i);
+    delay(50);
+    FastLED.show();
+  }
+  
+}
+
+void fadeOut(){
+  for(int i = brightness; i >= 0;i--){
+      FastLED.setBrightness(i);
+      delay(50);
+      FastLED.show();
+    }
+}
+ 
+
 void loop() {
 
-  while (Serial.available() > 0) {
-     String val = Serial.readString();
+  while(Serial.available() >  0){
+     serialVal = Serial.parseInt();
+     Serial.println(serialVal);  
+    if(serialVal == 1){
+    theme(1);
+    }else if(serialVal == 3 ){
+    theme(3);
+    }else if(serialVal == 2 || serialVal == 4){  
+     fadeOut();
+    }
+   
   }
-
-rainbow();
-
-
-
     
       
 }
