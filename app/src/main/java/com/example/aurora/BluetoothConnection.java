@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
-import java.util.UUID;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,6 +23,9 @@ public class BluetoothConnection extends AppCompatActivity {
         setUpBTConnection();
     }
 
+    /**
+     * Final inner class to send messages via a worker thread
+     */
     final class workerThread implements Runnable {
 
         public workerThread(String msg) {
@@ -36,7 +38,7 @@ public class BluetoothConnection extends AppCompatActivity {
     }
 
     /**
-     * THIS METHOD WILL SET UP THE BLUETOOTH ADAPTER AND GET THE CONNECTED DEVICE
+     * This method will set up the bluetooth adapter and get the connected device
      */
 
     public void setUpBTConnection() {
@@ -52,7 +54,6 @@ public class BluetoothConnection extends AppCompatActivity {
             for (BluetoothDevice device : pairedDevices) {
                 if (device.getName().equals("aurora")) {
                     Log.d("AURORA", device.getName());
-                    //Log.d("AURORA", device);
                     Log.d(TAG, "DEVICE HAS BEEN RETRIEVED");
                     connect_device = device;
                     break;
@@ -63,14 +64,13 @@ public class BluetoothConnection extends AppCompatActivity {
 
     /**
      * This method connects the socket of the client with a device server. Thereafter, it writes a message to device.
-     *
      * @param msg
      */
 
     public void send(String msg) {
         OutputStream outputStream;
         BluetoothSocket socket;
-        UUID uuid = UUID.fromString("0000111f-0000-1000-8000-00805f9b34fb");
+
         try {
             socket = (BluetoothSocket) connect_device.getClass().getMethod("createRfcommSocket", new Class[]{int.class}).invoke(connect_device, 1);
             Log.e(TAG, "Socket has been set");
@@ -80,36 +80,14 @@ public class BluetoothConnection extends AppCompatActivity {
                 Log.e(TAG, "Discoverability has been cancelled");
                 socket.connect();
                 Log.e(TAG, "Socket connected");
-
-
             }
             outputStream = socket.getOutputStream();
             outputStream.write(msg.getBytes());
             Log.e(TAG, "Message has been written first time");
-
-        } catch (IOException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+        }
+        catch (IOException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             Log.e(TAG, "Error creating socket");
             e.printStackTrace();
         }
-
-        /* try {
-            socket.connect();
-            Log.e(TAG, "Connected");
-        } catch (IOException e) {
-            Log.e(TAG, e.getMessage());
-            try {
-                Log.e(TAG, "trying fallback...");
-                socket = (BluetoothSocket) connect_device.getClass().getMethod("createRfcommSocket", new Class[]{int.class}).invoke(connect_device, 1);
-                socket.connect();
-                Log.e(TAG, "Socket connected");
-                outputStream = socket.getOutputStream();
-                Log.e(TAG, "outputStream set");
-                outputStream.write(msg.getBytes());
-                Log.e(TAG, "Write has been sent");
-            } catch (Exception e2) {
-                Log.e(TAG, "Couldn't establish Bluetooth connection!");
-            }
-        }*/
-
     }
 }
