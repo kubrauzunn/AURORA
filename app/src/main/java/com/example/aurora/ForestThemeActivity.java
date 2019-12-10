@@ -22,7 +22,7 @@ public class ForestThemeActivity extends BluetoothConnection {
     private static MediaPlayer forestMediaPlayer;
     private static final String TAG = "FOREST THEME";
     private SeekBar soundSeekBar;
-    AudioManager audioManager;
+    private AudioManager audioManager;
     int volume;
     private SeekBar brightnessSeekBar;
 
@@ -69,6 +69,7 @@ public class ForestThemeActivity extends BluetoothConnection {
                 forestMediaPlayer.release();
             }
         }
+
         (new Thread(new workerThread("2"))).start(); //THIS WILL STOP THE OCEAN LIGHTS
         Log.d(TAG, "MESSAGE STOP FROM FOREST THEME");
     }
@@ -108,10 +109,8 @@ public class ForestThemeActivity extends BluetoothConnection {
 
     void initVolControl() {
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        soundSeekBar.setMax(audioManager
-                .getStreamMaxVolume(AudioManager.STREAM_MUSIC));
-        soundSeekBar.setProgress(audioManager
-                .getStreamVolume(AudioManager.STREAM_MUSIC));
+        soundSeekBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        soundSeekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
     }
 
     /**
@@ -173,7 +172,6 @@ public class ForestThemeActivity extends BluetoothConnection {
     /**
      * Methods related to the management of fragments
      **/
-
     void setFM(){
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragmentBlob = fm.findFragmentById(R.id.blob_fragment);

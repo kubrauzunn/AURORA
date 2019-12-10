@@ -27,7 +27,6 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_theme);
         initWidgets();
-        //startSoundCloud();
         startSpotify();
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         setSoundSeekBar();
@@ -68,7 +67,6 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
                 int green = Color.green(color);
                 int red = Color.red(color);
                 int blue = Color.blue(color);
-
                 //sending rgb value as a string in a new thread
                 StringBuilder sb = new StringBuilder();
                 sb.append( red + "," + green + "," + blue );
@@ -126,10 +124,8 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
     void initVolControl() {
 
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        soundSeekBar.setMax(audioManager
-                .getStreamMaxVolume(AudioManager.STREAM_MUSIC));
-        soundSeekBar.setProgress(audioManager
-                .getStreamVolume(AudioManager.STREAM_MUSIC));
+        soundSeekBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        soundSeekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
 
     }
 
@@ -175,25 +171,4 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
         });
 
     }
-
-
-    /**
-     * The following section contains code which will be implemented later on in relation to
-     * the integration of Soundcloud, however Soundcloud was not available for Android development.
-     */
-   /* void startSoundCloud() {
-        soundCloudIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Intent soundCloud_intent = new Intent(Intent.ACTION_MAIN);
-                soundCloud_intent.setComponent(new ComponentName("com.soundcloud.android", "com.soundcloud.android.MainActivity"));
-                if (soundCloud_intent != null) {
-                    startActivity(soundCloud_intent);
-                } else {
-                    Toast.makeText(PersonalThemeActivity.this, "You need to have SoundCloud installed on the phone", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-    }*/
 }
