@@ -1,12 +1,10 @@
 package com.example.aurora;
-
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -16,8 +14,7 @@ import java.util.UUID;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BluetoothConnection extends AppCompatActivity {
-    private BluetoothSocket socket;
-    private BluetoothDevice connect_device = null;
+    private BluetoothDevice connect_device;
     private static final String TAG = "OCEAN THEME";
     private BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     private String btMsg;
@@ -47,13 +44,15 @@ public class BluetoothConnection extends AppCompatActivity {
         if (!mBluetoothAdapter.isEnabled()) {
             Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBluetooth, 0);
+            mBluetoothAdapter.enable();
         }
 
         Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
         if (pairedDevices.size() > 0) {
             for (BluetoothDevice device : pairedDevices) {
-                if (device.getName().equals("raspberrypi")) {
+                if (device.getName().equals("aurora")) {
                     Log.d("AURORA", device.getName());
+                    //Log.d("AURORA", device);
                     Log.d(TAG, "DEVICE HAS BEEN RETRIEVED");
                     connect_device = device;
                     break;
@@ -70,27 +69,30 @@ public class BluetoothConnection extends AppCompatActivity {
 
     public void send(String msg) {
         OutputStream outputStream;
-        UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+        BluetoothSocket socket;
+        UUID uuid = UUID.fromString("0000111f-0000-1000-8000-00805f9b34fb");
         try {
-            //socket = (BluetoothSocket) connect_device.getClass().getMethod("createRfcommSocket", new Class[]{int.class}).invoke(connect_device, 1);
-            socket = connect_device.createInsecureRfcommSocketToServiceRecord(uuid);
-            if (!socket.isConnected()) {
-                socket.connect();
-            }
+            socket = (BluetoothSocket) connect_device.getClass().getMethod("createRfcommSocket", new Class[]{int.class}).invoke(connect_device, 1);
+            Log.e(TAG, "Socket has been set");
 
+            if (!socket.isConnected()) {
+                mBluetoothAdapter.cancelDiscovery();
+                Log.e(TAG, "Discoverability has been cancelled");
+                socket.connect();
+                Log.e(TAG, "Socket connected");
+
+
+            }
             outputStream = socket.getOutputStream();
             outputStream.write(msg.getBytes());
+            Log.e(TAG, "Message has been written first time");
 
-        } catch (IOException e) {
+        } catch (IOException | NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             Log.e(TAG, "Error creating socket");
             e.printStackTrace();
-            /*} catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-                e.printStackTrace();
-                Log.e(TAG, "Error creating socket");
-            }*/
+        }
 
-
-       /* try {
+        /* try {
             socket.connect();
             Log.e(TAG, "Connected");
         } catch (IOException e) {
@@ -108,6 +110,6 @@ public class BluetoothConnection extends AppCompatActivity {
                 Log.e(TAG, "Couldn't establish Bluetooth connection!");
             }
         }*/
-        }
+
     }
 }

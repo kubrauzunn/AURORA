@@ -87,10 +87,10 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
 
                 StringBuilder sb = new StringBuilder();
                 sb.append("");
-                sb.append("," + red + "," + green + "," + blue );
+                sb.append( red + "," + green + "," + blue );
                 String s = sb.toString();
 
-                System.out.println("picked color " + s);
+                System.out.println("pickedColor" + s);
 
 
                (new Thread (new workerThread(s))).start();
@@ -128,9 +128,9 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
                 StringBuilder sb = new StringBuilder();
                 sb.append(" " + progress);
                 String s = sb.toString();
-                System.out.println("brightness " + s);
+                System.out.println("brightness" + s);
 
-                (new Thread(new workerThread("brightness send" + s))).start(); //THIS WILL START THE OCEAN LIGHTS
+                (new Thread(new workerThread("b" + s))).start(); //THIS WILL START THE OCEAN LIGHTS
 
             }
 

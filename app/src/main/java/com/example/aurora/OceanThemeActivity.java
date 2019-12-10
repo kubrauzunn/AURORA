@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
-
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -16,7 +15,6 @@ import androidx.fragment.app.FragmentManager;
 
 
 public class OceanThemeActivity extends BluetoothConnection {
-    //Music player variables
     private ImageView play_pause;
     private AnimatedVectorDrawable pause;
     private AnimatedVectorDrawable play;
@@ -24,10 +22,9 @@ public class OceanThemeActivity extends BluetoothConnection {
     private static MediaPlayer oceanMediaPlayer;
     private static final String TAG = "OCEAN THEME";
     private SeekBar soundSeekBar;
-    AudioManager audioManager;
+    private AudioManager audioManager;
     int volume;
     private SeekBar brightnessSeekBar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +33,10 @@ public class OceanThemeActivity extends BluetoothConnection {
         setUpPlayButton();
         setMediaPlayer();
         setFM();
-
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         setSoundSeekBar();
         trackSoundBarProgress();
         initVolControl();
-
         setBrightnessBar();
         trackBrightnessBarProgress();
 
@@ -51,13 +46,14 @@ public class OceanThemeActivity extends BluetoothConnection {
                 if (!oceanMediaPlayer.isPlaying()) {
                     oceanMediaPlayer.start();
                     animate(null);
-                    (new Thread(new workerThread("0"))).start(); //THIS WILL START THE OCEAN LIGHTS
+
+                    (new Thread(new workerThread("1"))).start(); //THIS WILL START THE OCEAN LIGHTS
                     Log.d(TAG, "MESSAGE START FROM OCEAN THEME");
 
                 } else {
                     oceanMediaPlayer.pause();
                     animate(null);
-                    (new Thread(new workerThread("1"))).start(); //THIS WILL STOP THE OCEAN LIGHTS
+                    (new Thread(new workerThread("2"))).start(); //THIS WILL STOP THE OCEAN LIGHTS
                     Log.d(TAG, "MESSAGE STOP FROM OCEAN THEME");
                 }
             }
@@ -113,10 +109,8 @@ public class OceanThemeActivity extends BluetoothConnection {
     void initVolControl() {
 
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        soundSeekBar.setMax(audioManager
-                .getStreamMaxVolume(AudioManager.STREAM_MUSIC));
-        soundSeekBar.setProgress(audioManager
-                .getStreamVolume(AudioManager.STREAM_MUSIC));
+        soundSeekBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        soundSeekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
 
     }
 
@@ -160,7 +154,7 @@ public class OceanThemeActivity extends BluetoothConnection {
                 StringBuilder sb = new StringBuilder();
                 sb.append(" " + progress );
                 String s = sb.toString();
-                System.out.println("brightness " + s);
+                System.out.println("b" + s);
 
 
                 (new Thread(new workerThread("brightness send" + s ))).start(); //THIS WILL START THE OCEAN LIGHTS
@@ -179,20 +173,12 @@ public class OceanThemeActivity extends BluetoothConnection {
 
     }
 
-
     /**
      * Set up fragment managers
      */
     void setFM(){
         Log.d(TAG,"FRAGMENTS SET UP");
         FragmentManager fm = getSupportFragmentManager();
-       /* Fragment fragment = fm.findFragmentById(R.id.fragment_theme);
-        if (fragment == null) {
-            fragment = new ThemeFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragment_theme, fragment)
-                    .commit();
-        }*/
         Fragment fragmentBlob = fm.findFragmentById(R.id.fragment_blob);
         if (fragmentBlob == null) {
             fragmentBlob = new BlobFragment();

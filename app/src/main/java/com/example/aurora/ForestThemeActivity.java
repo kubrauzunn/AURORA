@@ -25,6 +25,7 @@ public class ForestThemeActivity extends BluetoothConnection {
     int volume;
     private SeekBar brightnessSeekBar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,7 +150,7 @@ public class ForestThemeActivity extends BluetoothConnection {
                 StringBuilder sb = new StringBuilder();
                 sb.append(" " + progress );
                 String s = sb.toString();
-                System.out.println("brightness " + s);
+                System.out.println("b" + s);
 
                 (new Thread(new workerThread("brightness send" + s ))).start(); //THIS WILL START THE OCEAN LIGHTS
                 Log.d(TAG, "MESSAGE START FROM OCEAN THEME");
