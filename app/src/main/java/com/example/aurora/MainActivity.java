@@ -6,17 +6,20 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * This class functions as the launching activity of the AURORA app.
+ * It is only responsible for displaying the three themes and is responsible for starting the three other activities accordingly.
+ */
 
 public class MainActivity extends AppCompatActivity {
 
+   //UI widgets
     private ImageView personalPeacePlayBtn;
     private ImageView forestThemePlayBtn;
     private ImageView oceanThemePlayBtn;
-
     private TextView theme1;
     private TextView theme2;
     private TextView theme3;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The following sections of code contains helper methods to set up GUI elements
      */
-
     void initializePlayButtons() {
         personalPeacePlayBtn = findViewById(R.id.play_personal_theme_icon);
         forestThemePlayBtn = findViewById(R.id.play_forest_theme_icon2);
@@ -44,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
         theme2 = findViewById(R.id.theme2_title);
         theme3 = findViewById(R.id.theme3_title);
     }
+
+    /**
+     * The following sections of code contains helper methods to start the three different theme when UI widgets are being clicked on
+     */
 
     void startPersonalTheme(){
         personalPeacePlayBtn.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     void startOceanTheme(){
         oceanThemePlayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     void startForestTheme(){
         forestThemePlayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-
 
         theme2.setOnClickListener(new View.OnClickListener() {
             @Override

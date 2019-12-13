@@ -13,6 +13,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+
 public class ForestThemeActivity extends BluetoothConnection {
     private AnimatedVectorDrawable pause;
     private AnimatedVectorDrawable play;
@@ -21,9 +22,13 @@ public class ForestThemeActivity extends BluetoothConnection {
     private static MediaPlayer forestMediaPlayer;
     private static final String TAG = "FOREST THEME";
     private SeekBar soundSeekBar;
-    AudioManager audioManager;
-    int volume;
+    private AudioManager audioManager;
+    private int volume;
     private SeekBar brightnessSeekBar;
+    private static final String STOP_PLAYING_FOREST_THEME = "2";
+    private static final String START_PLAYING_FOREST_THEME = "3";
+    private static final int PROGRESS_INT_VALUE = 4;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,48 +50,17 @@ public class ForestThemeActivity extends BluetoothConnection {
                 if (!forestMediaPlayer.isPlaying()) {
                     forestMediaPlayer.start();
                     animate(null);
-                    (new Thread(new workerThread("3"))).start(); //THIS WILL START THE FOREST LIGHTS
+                    (new Thread(new workerThread(START_PLAYING_FOREST_THEME))).start(); //THIS WILL START THE FOREST LIGHTS
                     Log.d(TAG, "MESSAGE START FROM FOREST THEME");
-
-                } else {
+                }
+                else {
                     forestMediaPlayer.pause();
                     animate(null);
-                    (new Thread(new workerThread("4"))).start(); //THIS WILL STOP THE FOREST LIGHTS
+                    (new Thread(new workerThread(STOP_PLAYING_FOREST_THEME))).start(); //THIS WILL STOP THE FOREST LIGHTS
                     Log.d(TAG, "MESSAGE STOP FROM FOREST THEME");
                 }
             }
         });
-
-    }
-
-
-    /**
-     *
-     * Methods related to the playing of music and play buttons
-     *
-     **/
-
-    void setUpPlayButton(){
-        pp_button = findViewById(R.id.pause_play_b_forest);
-        pp_button.bringToFront();
-        pause = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_pause_play_button, null);
-        play = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_play_pause_button, null);
-    }
-
-
-    /**
-     * Sets up the media player for the ocean theme and play or pauses music
-     */
-    void setMediaPlayer(){
-        Log.d(TAG,"MEDIA PLAYER STARTED");
-        forestMediaPlayer = MediaPlayer.create(this, R.raw.forest_sounds);
-    }
-
-    public void animate(View view) {
-        AnimatedVectorDrawable drawable = tick ? play : pause ;
-        pp_button.setImageDrawable(drawable);
-        drawable.start();
-        tick = !tick;
     }
 
     @Override
@@ -99,23 +73,64 @@ public class ForestThemeActivity extends BluetoothConnection {
                 forestMediaPlayer.release();
             }
         }
+
+        (new Thread(new workerThread(STOP_PLAYING_FOREST_THEME))).start(); //THIS WILL STOP THE OCEAN LIGHTS
+        Log.d(TAG, "MESSAGE STOP FROM FOREST THEME");
     }
+
+    /**
+     * Methods related to the playing of music and play buttons
+     **/
+
+    void setUpPlayButton(){
+        pp_button = findViewById(R.id.pause_play_b_forest);
+        pp_button.bringToFront();
+        pause = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_pause_play_button, null);
+        play = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_play_pause_button, null);
+    }
+
+    /**
+     * Sets up the media player for the ocean theme and play or pauses music
+     */
+
+    void setMediaPlayer(){
+        Log.d(TAG,"MEDIA PLAYER STARTED");
+        forestMediaPlayer = MediaPlayer.create(this, R.raw.forest_sounds);
+    }
+    /**
+     * helper method to animate the blob and play buttons
+     */
+
+    public void animate(View view) {
+        AnimatedVectorDrawable drawable = tick ? play : pause ;
+        pp_button.setImageDrawable(drawable);
+        drawable.start();
+        tick = !tick;
+    }
+    /**
+     * helper method control the volume of the media player
+     */
 
     void initVolControl() {
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        soundSeekBar.setMax(audioManager
-                .getStreamMaxVolume(AudioManager.STREAM_MUSIC));
-        soundSeekBar.setProgress(audioManager
-                .getStreamVolume(AudioManager.STREAM_MUSIC));
+        soundSeekBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        soundSeekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
     }
 
+    /**
+     * helper method to initialize UI widget
+     */
     void setSoundSeekBar() {
         soundSeekBar = findViewById(R.id.volumeSeekBar);
     }
+
     void setBrightnessBar() {
         brightnessSeekBar = findViewById(R.id.brightnessSeekBar);
     }
 
+    /**
+     * Code for the sound/volume bar which allows the user to increase or decrease volume of the sound
+     */
     void trackSoundBarProgress() {
         soundSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -123,15 +138,13 @@ public class ForestThemeActivity extends BluetoothConnection {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
                 volume = progress;
-                //send volume
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                //code to come
             }
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                //Toast.makeText(getApplicationContext(), "Volume: " + Integer.toString(volume), Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -139,21 +152,17 @@ public class ForestThemeActivity extends BluetoothConnection {
     /**
      * Code for the brightness bar which allows the user to increase or decrease the lamps brightness
      */
-
     void trackBrightnessBarProgress(){
         brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
+                progress = progress + PROGRESS_INT_VALUE;
                 StringBuilder sb = new StringBuilder();
                 sb.append(" " + progress );
                 String s = sb.toString();
-                System.out.println("brightness " + s);
-
-                (new Thread(new workerThread("brightness send" + s ))).start(); //THIS WILL START THE OCEAN LIGHTS
+                (new Thread(new workerThread(s))).start();
                 Log.d(TAG, "MESSAGE START FROM OCEAN THEME");
-
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -162,24 +171,13 @@ public class ForestThemeActivity extends BluetoothConnection {
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
-
     }
-
 
     /**
      * Methods related to the management of fragments
      **/
-
     void setFM(){
         FragmentManager fm = getSupportFragmentManager();
-       /* Fragment fragmentTheme = fm.findFragmentById(R.id.fragment_theme);
-        if (fragmentTheme == null) {
-            fragmentTheme = new ThemeFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragment_theme, fragmentTheme)
-                    .commit();
-        }*/
-
         Fragment fragmentBlob = fm.findFragmentById(R.id.blob_fragment);
         if (fragmentBlob == null) {
             fragmentBlob = new BlobFragment();
@@ -188,5 +186,4 @@ public class ForestThemeActivity extends BluetoothConnection {
                     .commit();
         }
     }
-
 }

@@ -8,15 +8,31 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
-
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+/**
+ * Licence for including the color picker library:
+ *
+ * Copyright 2012 Lars Werkman
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 
 
 public class OceanThemeActivity extends BluetoothConnection {
-    //Music player variables
     private ImageView play_pause;
     private AnimatedVectorDrawable pause;
     private AnimatedVectorDrawable play;
@@ -24,10 +40,11 @@ public class OceanThemeActivity extends BluetoothConnection {
     private static MediaPlayer oceanMediaPlayer;
     private static final String TAG = "OCEAN THEME";
     private SeekBar soundSeekBar;
-    AudioManager audioManager;
-    int volume;
+    private AudioManager audioManager;
     private SeekBar brightnessSeekBar;
-
+    private static final String STOP_PLAYING_OCEAN_THEME = "2";
+    private static final String START_PLAYING_OCEAN_THEME = "1";
+    private static final int PROGRESS_INT_VALUE = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +53,10 @@ public class OceanThemeActivity extends BluetoothConnection {
         setUpPlayButton();
         setMediaPlayer();
         setFM();
-
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         setSoundSeekBar();
         trackSoundBarProgress();
         initVolControl();
-
         setBrightnessBar();
         trackBrightnessBarProgress();
 
@@ -51,14 +66,14 @@ public class OceanThemeActivity extends BluetoothConnection {
                 if (!oceanMediaPlayer.isPlaying()) {
                     oceanMediaPlayer.start();
                     animate(null);
-                    (new Thread(new workerThread("0"))).start(); //THIS WILL START THE OCEAN LIGHTS
+                    (new Thread(new workerThread(START_PLAYING_OCEAN_THEME))).start(); //THIS WILL START THE OCEAN LIGHTS
                     Log.d(TAG, "MESSAGE START FROM OCEAN THEME");
-
-                } else {
+                }
+                else {
+                    (new Thread(new workerThread(STOP_PLAYING_OCEAN_THEME))).start(); //THIS WILL STOP THE OCEAN LIGHTS
+                    Log.d(TAG, "MESSAGE STOP FROM OCEAN THEME");
                     oceanMediaPlayer.pause();
                     animate(null);
-                    (new Thread(new workerThread("1"))).start(); //THIS WILL STOP THE OCEAN LIGHTS
-                    Log.d(TAG, "MESSAGE STOP FROM OCEAN THEME");
                 }
             }
         });
@@ -82,13 +97,13 @@ public class OceanThemeActivity extends BluetoothConnection {
                 oceanMediaPlayer.release();
             }
         }
+        (new Thread(new workerThread(STOP_PLAYING_OCEAN_THEME))).start(); //THIS WILL STOP THE OCEAN LIGHTS
+        Log.d(TAG, "MESSAGE STOP FROM OCEAN THEME");
     }
-
 
     /**
      * Animate the pause and play vectors inside the play/pause button
      */
-
     public void animate(View view) {
         Log.d(TAG,"ANIMATE STARTED");
         AnimatedVectorDrawable drawable = tick ? play : pause;
@@ -96,7 +111,6 @@ public class OceanThemeActivity extends BluetoothConnection {
         drawable.start();
         tick = !tick;
     }
-
 
     /**
      * Sets up the buttons for the media player
@@ -110,39 +124,42 @@ public class OceanThemeActivity extends BluetoothConnection {
         play = (AnimatedVectorDrawable) ResourcesCompat.getDrawable(getResources(), R.drawable.avd_play_pause_button, null);
     }
 
+    /**
+     * Sets up the control of the media player
+     */
+
     void initVolControl() {
-
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        soundSeekBar.setMax(audioManager
-                .getStreamMaxVolume(AudioManager.STREAM_MUSIC));
-        soundSeekBar.setProgress(audioManager
-                .getStreamVolume(AudioManager.STREAM_MUSIC));
-
+        soundSeekBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
+        soundSeekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
     }
 
+    /**
+     * helper method to wire up UI widgets
+     */
     void setSoundSeekBar() {
         soundSeekBar = findViewById(R.id.volumeSeekBar);
     }
+
     void setBrightnessBar() {
         brightnessSeekBar = findViewById(R.id.brightnessSeekBar);
     }
 
+    /**
+     * method to track progress on the brightness bar which allows the user to increase or decrease the lamps brightness
+     */
     void trackSoundBarProgress() {
         soundSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
-                volume = progress;
-                //send volume
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
             }
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                //Toast.makeText(getApplicationContext(), "Volume: " + Integer.toString(volume), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -150,49 +167,36 @@ public class OceanThemeActivity extends BluetoothConnection {
     /**
      * Code for the brightness bar which allows the user to increase or decrease the lamps brightness
      */
-
     void trackBrightnessBarProgress(){
         brightnessSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
+                progress = progress + PROGRESS_INT_VALUE;
                 StringBuilder sb = new StringBuilder();
                 sb.append(" " + progress );
                 String s = sb.toString();
-                System.out.println("brightness " + s);
 
-
-                (new Thread(new workerThread("brightness send" + s ))).start(); //THIS WILL START THE OCEAN LIGHTS
+                (new Thread(new workerThread( s ))).start();
                 Log.d(TAG, "MESSAGE START FROM OCEAN THEME");
-
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                //code to come
             }
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                //come to come
             }
         });
 
     }
 
-
     /**
-     * Set up fragment managers
+     * Set up fragment manager
      */
     void setFM(){
         Log.d(TAG,"FRAGMENTS SET UP");
         FragmentManager fm = getSupportFragmentManager();
-       /* Fragment fragment = fm.findFragmentById(R.id.fragment_theme);
-        if (fragment == null) {
-            fragment = new ThemeFragment();
-            fm.beginTransaction()
-                    .add(R.id.fragment_theme, fragment)
-                    .commit();
-        }*/
         Fragment fragmentBlob = fm.findFragmentById(R.id.fragment_blob);
         if (fragmentBlob == null) {
             fragmentBlob = new BlobFragment();
@@ -201,6 +205,4 @@ public class OceanThemeActivity extends BluetoothConnection {
                     .commit();
         }
     }
-
-
 }
