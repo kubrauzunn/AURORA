@@ -17,10 +17,10 @@ import com.larswerkman.holocolorpicker.ColorPicker;
 public class PersonalThemeActivity extends BluetoothConnection implements ColorPicker.OnColorChangedListener {
 
     private ImageView spotifyIcon;
-    //private ImageView soundCloudIcon;
     private SeekBar soundSeekBar;
     private AudioManager audioManager;
     private SeekBar brightnessSeekBar;
+    private String STOP_PLAYING_PERSONAL_THEME = "2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
     @Override
     protected void onPause() {
         super.onPause();
-        (new Thread(new workerThread("2"))).start(); //THIS WILL STOP THE OCEAN LIGHTS
+        (new Thread(new workerThread(STOP_PLAYING_PERSONAL_THEME))).start(); //THIS WILL STOP THE OCEAN LIGHTS
         System.out.println("MESSAGE STOP FROM OCEAN THEME");
     }
 

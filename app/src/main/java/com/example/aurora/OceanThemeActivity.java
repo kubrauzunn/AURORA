@@ -42,6 +42,8 @@ public class OceanThemeActivity extends BluetoothConnection {
     private SeekBar soundSeekBar;
     private AudioManager audioManager;
     private SeekBar brightnessSeekBar;
+    private String STOP_PLAYING_OCEAN_THEME = "2";
+    private String START_PLAYING_OCEAN_THEME = "1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +65,11 @@ public class OceanThemeActivity extends BluetoothConnection {
                 if (!oceanMediaPlayer.isPlaying()) {
                     oceanMediaPlayer.start();
                     animate(null);
-                    (new Thread(new workerThread("1"))).start(); //THIS WILL START THE OCEAN LIGHTS
+                    (new Thread(new workerThread(START_PLAYING_OCEAN_THEME))).start(); //THIS WILL START THE OCEAN LIGHTS
                     Log.d(TAG, "MESSAGE START FROM OCEAN THEME");
                 }
                 else {
-                    (new Thread(new workerThread("2"))).start(); //THIS WILL STOP THE OCEAN LIGHTS
+                    (new Thread(new workerThread(STOP_PLAYING_OCEAN_THEME))).start(); //THIS WILL STOP THE OCEAN LIGHTS
                     Log.d(TAG, "MESSAGE STOP FROM OCEAN THEME");
                     oceanMediaPlayer.pause();
                     animate(null);
@@ -94,7 +96,7 @@ public class OceanThemeActivity extends BluetoothConnection {
                 oceanMediaPlayer.release();
             }
         }
-        (new Thread(new workerThread("2"))).start(); //THIS WILL STOP THE OCEAN LIGHTS
+        (new Thread(new workerThread(STOP_PLAYING_OCEAN_THEME))).start(); //THIS WILL STOP THE OCEAN LIGHTS
         Log.d(TAG, "MESSAGE STOP FROM OCEAN THEME");
     }
 
