@@ -42,8 +42,9 @@ public class OceanThemeActivity extends BluetoothConnection {
     private SeekBar soundSeekBar;
     private AudioManager audioManager;
     private SeekBar brightnessSeekBar;
-    private String STOP_PLAYING_OCEAN_THEME = "2";
-    private String START_PLAYING_OCEAN_THEME = "1";
+    private static final String STOP_PLAYING_OCEAN_THEME = "2";
+    private static final String START_PLAYING_OCEAN_THEME = "1";
+    private static final int PROGRESS_INT_VALUE = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -172,7 +173,7 @@ public class OceanThemeActivity extends BluetoothConnection {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-                progress = progress + 4;
+                progress = progress + PROGRESS_INT_VALUE;
                 StringBuilder sb = new StringBuilder();
                 sb.append(" " + progress );
                 String s = sb.toString();

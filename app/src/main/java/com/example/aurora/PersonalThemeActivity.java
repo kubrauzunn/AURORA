@@ -20,7 +20,8 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
     private SeekBar soundSeekBar;
     private AudioManager audioManager;
     private SeekBar brightnessSeekBar;
-    private String STOP_PLAYING_PERSONAL_THEME = "2";
+    private static final String STOP_PLAYING_PERSONAL_THEME = "2";
+    private static final int PROGRESS_INT_VALUE = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +102,7 @@ public class PersonalThemeActivity extends BluetoothConnection implements ColorP
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-                progress = progress + 4; //in order to avoid confusion with theme numbers which are sent to the raspberry pi
+                progress = progress + PROGRESS_INT_VALUE; //in order to avoid confusion with theme numbers which are sent to the raspberry pi
                 StringBuilder sb = new StringBuilder();
                 sb.append(" " + progress );
                 String s = sb.toString();

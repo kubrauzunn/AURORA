@@ -23,10 +23,11 @@ public class ForestThemeActivity extends BluetoothConnection {
     private static final String TAG = "FOREST THEME";
     private SeekBar soundSeekBar;
     private AudioManager audioManager;
-    int volume;
+    private int volume;
     private SeekBar brightnessSeekBar;
-    private String STOP_PLAYING_FOREST_THEME = "2";
-    private String START_PLAYING_FOREST_THEME = "3";
+    private static final String STOP_PLAYING_FOREST_THEME = "2";
+    private static final String START_PLAYING_FOREST_THEME = "3";
+    private static final int PROGRESS_INT_VALUE = 4;
 
 
     @Override
@@ -156,7 +157,7 @@ public class ForestThemeActivity extends BluetoothConnection {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                progress = progress + 4;
+                progress = progress + PROGRESS_INT_VALUE;
                 StringBuilder sb = new StringBuilder();
                 sb.append(" " + progress );
                 String s = sb.toString();
